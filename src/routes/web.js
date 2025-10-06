@@ -14,6 +14,7 @@ let initWebRoutes = (app) => {
     router.get('/genres', homeController.getGenresPage);
     router.get('/all_playlist', homeController.getAllPlaylistPage);
     router.get('/artist', homeController.getArtistPage);
+    router.get('/admin', homeController.getAdminPage);
 
     router.get('/login', homeController.getLoginPage);
     router.post('/post-loginuser', homeController.postLoginPage);

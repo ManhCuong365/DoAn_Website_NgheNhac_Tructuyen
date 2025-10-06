@@ -5,37 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/admin_page.css">
 </head>
 
 <body>
-    <h1> Create Song</h1>
-    <form action="/post-song" method="POST" enctype="multipart/form-data">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required><br><br>
+    <div class="nav_bar">
+        <ul class="menu_list">
+            <li class="item"><a href="/display-alluser">User</a></li>
+            <li class="item"><a href="/display-allalbum">Album</a></li>
+            <li class="item"><a href="/display-allsong">Song</a></li>
+            <li class="item"><a href="#">Artist</a></li>
+            <li class="item"><a href="#">Favourite</a></li>
 
-        <label for="artist">Artist:</label>
-        <input type="text" id="artist_id" name="artist_id"><br><br>
+        </ul>
+    </div>
 
-        <label for="album">Album:</label>
-        <select name="album_id" id="album_id">
-            <% dataTable.forEach(album => { %>
-                <option value="<%= album.id %>"><%= album.title %></option>
-            <% }) %>
-        </select><br><br>
+    <body>
+        <h1> Create Song</h1>
+        <form action="/post-song" method="POST" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
 
-        <label type="date" for="release_date">Release Date:</label>
-        <input type="text" id="release_date" name="release_date" required><br><br>
+            <label for="artist">Artist:</label>
+            <input type="text" id="artist_id" name="artist_id"><br><br>
 
-        <label for="img">FileImage:</label>
-        <input type="text" id="img" name="imgUrl"><br><br>
+            <label for="album">Album:</label>
+            <select name="album_id" id="album_id">
+                <% dataTable.forEach(album=> { %>
+                    <option value="<%= album.id %>">
+                        <%= album.title %>
+                    </option>
+                    <% }) %>
+            </select><br><br>
 
-        <label for="imgFile">ImageURL:</label>
-        <input type="file" name="imgFile" accept="image/*"><br><br>
+            <label type="date" for="release_date">Release Date:</label>
+            <input type="text" id="release_date" name="release_date" required><br><br>
 
-        <label for="Upload">Upload</label>
-        <input type="file" name="file_url"><br><br>
-        <button type="submit">Create Song</button>
-    </form>
-</body>
+            <label for="img">FileImage:</label>
+            <input type="text" id="img" name="imgUrl"><br><br>
+
+            <label for="imgFile">ImageURL:</label>
+            <input type="file" name="imgFile" accept="image/*"><br><br>
+
+            <label for="Upload">Upload</label>
+            <input type="file" name="file_url"><br><br>
+            <button type="submit">Create Song</button>
+        </form>
+    </body>
 
 </html>

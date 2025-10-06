@@ -33,6 +33,9 @@ let getArtistPage = (req, res) => {
     return res.render("artist.ejs");
 }
 
+let getAdminPage = (req, res) => {
+    return res.render("admin_page.ejs");
+}
 // Sign up zone
 let getSighUpPage = (req, res) => {
     return res.render("sighup.ejs");
@@ -243,6 +246,7 @@ export default {
     getGenresPage: getGenresPage,
     getAllPlaylistPage: getAllPlaylistPage,
     getArtistPage: getArtistPage,
+    getAdminPage: getAdminPage,
 
     getLoginPage: getLoginPage,
     getSighUpPage: getSighUpPage,

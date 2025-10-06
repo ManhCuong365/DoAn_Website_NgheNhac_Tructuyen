@@ -5,36 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/admin_page.css">
 </head>
 
 <body>
-    <h1>All Albums</h1>
-    <a href="/create-page-album"> Create New Album</a>
-    <table border="1" cellspacing="0" cellpadding="10">
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Release Date</th>
-            <th>Actions</th>
-        </tr>
-        <% dataTable.forEach(album=> { %>
+    <div class="nav_bar">
+        <ul class="menu_list">
+            <li class="item"><a href="/display-alluser">User</a></li>
+            <li class="item"><a href="/display-allalbum">Album</a></li>
+            <li class="item"><a href="/display-allsong">Song</a></li>
+            <li class="item"><a href="#">Artist</a></li>
+            <li class="item"><a href="#">Favourite</a></li>
+
+        </ul>
+    </div>
+
+    <body>
+        <h1>All Albums</h1>
+        <a href="/create-page-album"> Create New Album</a>
+        <table border="1" cellspacing="0" cellpadding="10">
             <tr>
-                <td>
-                    <%= album.id %>
-                </td>
-                <td>
-                    <%= album.title %>
-                </td>
-                <td>
-                    <%= album.release_date %>
-                </td>
-                <td>
-                    <a href="/edit-albums?id=<%= album.id %>"> Edit </a>
-                    <a href="/detele-albums?id=<%= album.id %>"
-                        onclick="return confirm('Are you want to detele this album?');"> Detele </a>
-                </td>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Actions</th>
             </tr>
-            <% }) %>
-</body>
+            <% dataTable.forEach(album=> { %>
+                <tr>
+                    <td>
+                        <%= album.id %>
+                    </td>
+                    <td>
+                        <%= album.title %>
+                    </td>
+                    <td>
+                        <%= album.release_date %>
+                    </td>
+                    <td>
+                        <a href="/edit-albums?id=<%= album.id %>"> Edit </a>
+                        <a href="/detele-albums?id=<%= album.id %>"
+                            onclick="return confirm('Are you want to detele this album?');"> Detele </a>
+                    </td>
+                </tr>
+                <% }) %>
+    </body>
 
 </html>
