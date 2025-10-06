@@ -1,5 +1,5 @@
 🎶 Mô tả Dự án
-Đây là một ứng dụng website nghe nhạc trực tuyến được xây dựng bằng Node.js và Express.js, sử dụng [Tên Database: gen_music, ví dụ: PostgreSQL/MySQL/MongoDB] và tuân thủ mô hình MVC (Model-View-Controller). Dự án tập trung vào trải nghiệm người dùng mượt mà và khả năng quản lý thư viện nhạc cá nhân hiệu quả.
+Đây là một ứng dụng website nghe nhạc trực tuyến được xây dựng bằng Node.js và Express.js, sử dụng [ví dụ: PostgreSQL/MySQL/MongoDB] và tuân thủ mô hình MVC (Model-View-Controller). Dự án tập trung vào trải nghiệm người dùng mượt mà và khả năng quản lý thư viện nhạc cá nhân hiệu quả.
 
 ✨ Các Chức năng Nổi bật
 Nghe nhạc: Phát các bài hát từ thư viện.
