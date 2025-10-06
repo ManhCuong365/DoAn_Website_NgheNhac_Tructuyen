@@ -1,58 +1,40 @@
-🎶 Mô tả Dự án
-Đây là một ứng dụng website nghe nhạc trực tuyến được xây dựng bằng Node.js và Express.js, sử dụng [ví dụ: PostgreSQL/MySQL/MongoDB] và tuân thủ mô hình MVC (Model-View-Controller). Dự án tập trung vào trải nghiệm người dùng mượt mà và khả năng quản lý thư viện nhạc cá nhân hiệu quả.
+# DoAn_Website_NgheNhac_Tructuyen
+## Giới Thiệu
+- Đây là ứng dụng website nghe nhạc trực tuyến, được phát triển nhằm mang lại trải nghiệm quản lý và thưởng thức nhạc cá nhân tốt nhất. Dự án sử dụng các công nghệ web hiện đại như Node.js, Express.js và tuân thủ kiến trúc MVC (Model-View-Controller) để dễ dàng bảo trì và mở rộng.
 
-✨ Các Chức năng Nổi bật
-Nghe nhạc: Phát các bài hát từ thư viện.
+## Tính Năng Chính
+- Phát nhạc: Nghe nhạc trực tuyến với giao diện thân thiện, ổn định.
+- Quản lý Thư viện Cá nhân:
+- Lưu Bài Hát Yêu Thích: Người dùng có thể đánh dấu và lưu các bài hát mình yêu thích vào danh sách cá nhân.
+- Tìm kiếm: Tìm kiếm bài hát, album, nghệ sĩ và thể loại.
+- Tài khoản: Đăng ký, Đăng nhập và quản lý thông tin người dùng.
+- Phân loại: Duyệt và sắp xếp nhạc theo Album, Nghệ sĩ, Thể loại (dựa trên các Models trong thư mục models/).
 
-Quản lý người dùng: Đăng ký, Đăng nhập, và Quản lý thông tin cá nhân.
+## Công Nghệ Sử Dụng
+- Backend: Node.js (Express.js)
+- Frontend: HTML, CSS, JavaScript (sử dụng EJS cho View Engine)
+- Cơ sở dữ liệu: MySQL
+- Kiến trúc: Mô hình MVC (Model-View-Controller)
 
-Thư viện Cá nhân:
-
-Lưu Bài Hát Yêu Thích: Người dùng có thể đánh dấu và lưu các bài hát yêu thích vào danh sách cá nhân để dễ dàng truy cập lại.
-
-Tìm kiếm: Tìm kiếm bài hát, album, và nghệ sĩ.
-
-Phân loại: Xem danh sách các Album, Nghệ sĩ, và Thể loại.
-
-Playlist: Tạo và quản lý các danh sách phát.
-
-🛠️ Công nghệ Sử dụng
-Backend: Node.js, Express.js
-
-Database: [Điền vào: Ví dụ: PostgreSQL, MySQL, MongoDB]
-
-ORM/Database tool: [Ví dụ: Sequelize, Mongoose]
-
-Kiến trúc: Mô hình MVC (Model-View-Controller)
-
-Các thư mục chính: controllers (logic xử lý), models (cấu trúc dữ liệu), services (logic nghiệp vụ), routes (định tuyến URL).
-
-🚀 Hướng dẫn Cài đặt & Khởi chạy
-Để chạy ứng dụng này, giả định bạn đã có mã nguồn dự án và đã cài đặt Node.js cùng NPM trên máy. Bạn cần mở Terminal (hoặc Command Prompt) trong thư mục gốc của dự án trước khi thực hiện các lệnh dưới đây.
-
-Cài đặt các gói phụ thuộc:
-
-Bash
-
+## Hướng dẫn Cài Đặt & Khởi chạy
+Giả định bạn đã cài đặt Node.js và MySQL trên máy.
+### 1.Cài đặt các gói phụ thuộc (Dependencies):
+```bash
 npm install
-Thiết lập file cấu hình môi trường:
+```
 
-Đổi tên file .env.example thành .env.
+### 2.Cấu hình Môi trường:
+- Tạo file .env từ .env.example.
+- Cập nhật thông tin kết nối database (MySQL) của bạn trong file .env.
 
-Mở file .env và điền thông tin kết nối database của bạn.
-
-Chạy Database Migrations và Seeding (Nếu có):
-
-Bash
-
-# Chạy các migration để tạo bảng
-npm run migrate
-# Chạy seeder để thêm dữ liệu mẫu (nếu có)
-npm run seed
-Khởi chạy Server:
-
-Bash
-
+### 3.Khởi động Server:
+```bash
 npm start
-Truy cập ứng dụng:
-Mở trình duyệt và truy cập vào địa chỉ: http://localhost:[Cổng ứng dụng của bạn, ví dụ: 3000]
+```
+
+### 4.Truy cập ứng dụng:
+- Mở trình duyệt và truy cập: http://localhost:3000/ (hoặc cổng mà bạn đã thiết lập)
+
+## Ghi Chú Phát Triển
+- Dự án đang trong quá trình phát triển và hoàn thiện.
+- Logic nghiệp vụ và tương tác database được quản lý tập trung trong các thư mục services/, controllers/, và models/.
