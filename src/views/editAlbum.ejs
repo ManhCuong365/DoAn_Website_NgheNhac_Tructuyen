@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Edit Albums</h1>
+</body>
+
+    <form action="/put-album" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<%= album.id %>">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="<%= album.title %>" required><br><br>
+        <label for="release_date">Release Date:</label>
+        <input type="text" id="release_date" name="release_date" value="<%= album.release_date %>" required><br><br>
+        <!-- <label for="artist_id">Artist ID:</label>
+        <input type="text" id="artist_id" name="artist_id" value="<%= album.artist_id %>" required><br><br> -->
+        <label for="image">Image:</label>
+        <input type="file" id="imgAlbumsFile" name="imgAlbumsFile"><br><br>
+        <button type="submit">Update Album</button>
+    </form>
+</html>

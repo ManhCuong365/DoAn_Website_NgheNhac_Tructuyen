@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/sighup.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <title>Tạo Tài Khoản</title>
+</head>
+
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <div class="register-logo logo_link">
+                <a href="/home">
+                    <span>GEN</span>MUSIC
+                </a>
+            </div>
+            <h1 class="register-title">Đăng ký<br></h1>
+            <form action="/post-usersighup" method="POST" class="register-form">
+                <label for="username">Tên người dùng</label>
+                <input type="username" name="username" id="username" placeholder="Name" required>
+                <label for="email">Địa chỉ email</label>
+                <input type="email" name="email" id="email" placeholder="name@domain.com" required>
+                <label for="password">Mật khẩu</label>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <button class="register-btn" type="submit">Đăng ký</button>
+            </form>
+            <div class="register-sighup register-login">
+                <span>Bạn đã có tài khoản?</span>
+                <a href="/login" class="register-login-link">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

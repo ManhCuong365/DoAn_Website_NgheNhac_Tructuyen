@@ -1,0 +1,248 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/detail_playlist.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+    <title>Detail Albums</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="nav_bar">
+                <div class="logo">
+                    <a class="logo_link" href="/home">
+                        <span>GEN</span>MUSIC
+                    </a>
+                </div>
+                <div class="middle_nav">
+                    <div class="main_menu">
+                        <ul class="menu_list">
+                            <li><a class="home_menu" href="/home">Home</a></li>
+                            <li><a class="home_menu" href="#">About</a></li>
+                            <li><a class="home_menu" href="/profile">Library</a></li>
+                            <li class="menu_item has-dropdown">Pages
+                                <ul class="dropdown">
+                                    <li class="item_drop"><a class="link_drop" href="#">Profile</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Artists</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Privacy policy</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Admin</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="home_menu" href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right_nav">
+                    <div class="help">
+                        <a href="#">
+                            <span style="color: #9b9b9be7;">Help</span>
+                        </a>
+                    </div>
+                    <div class="divider">
+                        <a style="cursor: context-menu;" href="#">|</a>
+                    </div>
+                    <div class="login">
+                        <a href="/login">
+                            <span>Login</span>
+                        </a>
+                    </div>
+                    <div class="sign_up">
+                        <a href="/create-account">
+                            <span style="color: #fc0254;">Create an account</span>
+                        </a>
+                    </div>
+                    <!-- <div class="notification">
+                        <a href="#">
+                            <i class=""></i>
+                        </a>
+                    </div>
+                    <div class="profile">
+                        <a href="#">
+                            <i class=""></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="main_content">
+        <div class="title_detail_playlists">
+            <div class="title_header_playlists">
+                <div class="content_title">
+                    <img src="/uploads/albums/<%= album.img %>" alt="<%= album.title %>">
+                </div>
+            </div>
+            <div class="playlist_detail_content">
+                <div class="play_list_info">
+                    <span><b>GenMusic</b> • 5 songs</span>
+                </div>
+                <div class="playlist_detail_title">
+                    <span>
+                        <%= album.title %>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="play_section">
+            <div class="play_button_and_like">
+                <div class="play_button">
+                    <button class="play_now">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+                <div class="like_button">
+                    <button class="like">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="custom_audio_player">
+                <button id="playPauseBtn" class="audio_btn"><i class="fa-solid fa-play"></i></button>
+                <span id="currentTime" class="audio_time">0:00</span>
+                <input type="range" id="seekBar" value="0" min="0" max="100" step="1" class="audio_seek">
+                <span id="duration" class="audio_time">0:00</span>
+                <button id="muteBtn" class="audio_btn"><i class="fa-solid fa-volume-up"></i></button>
+                <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" class="audio_volume">
+                <audio id="audio" src=""></audio>
+            </div>
+
+        </div>
+
+        <div class="playlist_table_wrap">
+            <table class="playlist_table">
+                <thead>
+                    <tr>
+                        <th style="width:40px;">#</th>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Date</th>
+                        <th style="width:60px;"><i class="fa fa-clock"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tbody>
+                    <% if (songs && songs.length> 0) { %>
+                        <% songs.forEach(function(song, index) { %>
+                            <tr class="song-row" data-src="/uploads/songs/<%= song.file_url %>">
+                                <td class="stt">
+                                    <a href="#" style="text-decoration: none; color: inherit;">
+                                        <span>
+                                            <%= index + 1 %>
+                                        </span>
+                                        <i class="fa-solid fa-play row_play_btn"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <div class="song_info">
+                                        <div>
+                                            <div class="song_title">
+                                                <%= song.title %>
+                                            </div>
+                                            <div class="song_artist">
+                                                <%= song.artist_id %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <%= song.artist_id %>
+                                </td>
+                                <td>
+                                    <%= song.release_date %>
+                                </td>
+                                <td><!-- duration nếu có --></td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="5">No songs available in this album.</td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="footer_container">
+            <div class="footer_left">
+                <div class="footer_logo">
+                    <span style="color:#fc0254;font-weight:700;">GEN</span>MUSIC
+                </div>
+                <div class="footer_copyright">
+                    COPYRIGHT ©2025 ALL RIGHTS RESERVED | THIS TEMPLATE IS MADE WITH <span style="color:#fff;">♡</span>
+                    BY
+                    <a href="#" style="color:#2196f3;text-decoration:none;">MANHCUONG</a>
+                </div>
+                <div class="footer_social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer_menus">
+                <div class="footer_menu">
+                    <div class="footer_menu_title">ABOUT US</div>
+                    <a href="#">Our Story</a>
+                    <a href="#">Sol Music Blog</a>
+                    <a href="#">History</a>
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_title">PRODUCTS</div>
+                    <a href="#">Music</a>
+                    <a href="#">Subscription</a>
+                    <a href="#">Custom Music</a>
+                    <a href="#">Footage</a>
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_title">PLAYLISTS</div>
+                    <a href="#">Newsletter</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Press</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script src="/js/audio_player.js"></script>
+<script>
+    document.querySelectorAll('.song-row').forEach(row => {
+        row.addEventListener('click', function () {
+            const audio = document.getElementById('audio');
+            const src = this.getAttribute('data-src');
+            if (src) {
+                audio.src = src;
+                audio.play();
+            }
+        });
+    });
+</script>
+<script>
+document.querySelectorAll('.row_play_btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const row = this.closest('.song-row');
+        const audio = document.getElementById('audio');
+        const src = row.getAttribute('data-src');
+        if (src) {
+            audio.src = src;
+            audio.play();
+        }
+    });
+});
+</script>
+
+</html>

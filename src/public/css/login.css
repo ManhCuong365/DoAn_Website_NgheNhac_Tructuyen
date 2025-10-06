@@ -1,0 +1,165 @@
+body {
+    background: #000000 !important;
+}
+
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-box {
+    background: transparent;
+    padding: 40px 36px 24px 36px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 370px;
+}
+
+.register-logo {
+    font-size: 45px;
+    margin-bottom: 24px;
+}
+
+.register-title {
+    color: #fff;
+    font-size: 38px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 32px;
+    line-height: 1.1;
+}
+
+.register-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.register-form label {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.register-form input[type="email"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #181818;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 2px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.register-form input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #181818;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 2px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.register-form input[type="email"]:focus {
+    border: 1.5px solid #1ed760;
+}
+.register-form input[type="password"]:focus {
+    border: 1.5px solid #1ed760;
+}
+
+.register-link {
+    color: #1ed760;
+    font-size: 14px;
+    text-decoration: underline;
+    margin-bottom: 8px;
+    margin-top: -2px;
+    align-self: flex-start;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px 0;
+    background: #1ed760;
+    color: #111;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 24px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+
+.register-btn:hover {
+    background: #1db954;
+}
+
+.register-or {
+    color: #fff;
+    opacity: 0.7;
+    margin: 0px 0 10px 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.register-social {
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 24px;
+    border: 1.5px solid #333;
+    background: #181818;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.18s, border 0.18s;
+}
+
+.register-social.google:hover {
+    background: #fff;
+    color: #222;
+    border-color: #fff;
+}
+
+.register-social.apple:hover {
+    background: #fff;
+    color: #222;
+    border-color: #fff;
+}
+
+.register-login {
+    color: #fff;
+    margin-top: 18px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.register-login-link {
+    color: #fff;
+    font-weight: 700;
+    margin-left: 6px;
+    text-decoration: underline;
+}
+.register-login-link:hover {
+    color: #1ed760;
+}

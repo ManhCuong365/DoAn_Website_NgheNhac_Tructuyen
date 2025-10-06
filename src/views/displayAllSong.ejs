@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Display Songs</h1>
+    <a href="/create-page-song">Create New Song</a>
+    <table border="1" cellspacing="0" cellpadding="10">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Release</th>
+            <th>Album</th>
+            <th>Actions</th>
+        </tr>
+        <% dataTable.forEach(song=> { %>
+            <tr>
+                <td>
+                    <%= song.id %>
+                </td>
+                <td>
+                    <%= song.title %>
+                </td>
+                <td>
+                    <%= song.artist_id %>
+                </td>
+                <td>
+                    <%= song.release_date %>
+                <td>
+                    <%= song.Album ? song.Album.title : 'N/A' %>
+                </td>
+                <td>
+                    <a href="/edit-song?id=<%= song.id %>">Edit</a> |
+                    <a href="/delete-song?id=<%= song.id %>"
+                        onclick="return confirm('Are you sure you want to delete this song?');">Delete</a>
+                </td>
+            </tr>
+            <% }) %>
+</body>
+
+</html>

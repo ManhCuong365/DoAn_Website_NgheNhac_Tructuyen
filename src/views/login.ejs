@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <title>Đăng nhập</title>
+</head>
+
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <div class="register-logo logo_link">
+                <a href="/home">
+                    <span>GEN</span>MUSIC
+                </a>
+            </div>
+            <h1 class="register-title">Đăng nhập<br></h1>
+            <form action="/post-loginuser" method="POST" class="register-form">
+                <label for="email">Địa chỉ email</label>
+                <input type="email" name="email" id="email" placeholder="name@domain.com" required>
+                <label for="password">Mật khẩu</label>
+                <input type="password" name="password" id="password" placeholder="Mật khẩu" required>
+                <a href="#" class="register-link">Dùng số điện thoại.</a>
+                <button type="submit" class="register-btn">Tiếp theo</button>
+            </form>
+            <div class="register-or">hoặc</div>
+            <button class="register-social google"><i class="fab fa-google"></i> Đăng ký bằng Google</button>
+            <button class="register-social apple"><i class="fab fa-apple"></i> Đăng ký bằng Apple</button>
+            <div class="register-login">
+                <span>Bạn chưa có tài khoản?</span>
+                <a href="/create-account" class="register-login-link">Đăng ký</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/homepage.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Gen_Music</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="nav_bar">
+                <div class="logo">
+                    <a class="logo_link" href="/home">
+                        <span>GEN</span>MUSIC
+                    </a>
+                </div>
+                <div class="middle_nav">
+                    <div class="main_menu">
+                        <ul class="menu_list">
+                            <li><a class="home_menu" href="/home">Home</a></li>
+                            <li><a class="home_menu" href="#">About</a></li>
+                            <li><a class="home_menu" href="/profile">Library</a></li>
+                            <li class="menu_item has-dropdown">Pages
+                                <ul class="dropdown">
+                                    <li class="item_drop"><a class="link_drop" href="#">Profile</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Artists</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Privacy policy</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Admin</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="home_menu" href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right_nav">
+                    <div class="help">
+                        <a href="#">
+                            <span style="color: #9b9b9be7;">Help</span>
+                        </a>
+                    </div>
+                    <div class="divider">
+                        <a style="cursor: context-menu;" href="#">|</a>
+                    </div>
+                    <div class="login">
+                        <a href="/login">
+                            <span>Login</span>
+                        </a>
+                    </div>
+                    <div class="sign_up">
+                        <a href="/create-account">
+                            <span style="color: #fc0254;">Create an account</span>
+                        </a>
+                    </div>
+                    <!-- <div class="notification">
+                        <a href="#">
+                            <i class=""></i>
+                        </a>
+                    </div>
+                    <div class="profile">
+                        <a href="#">
+                            <i class=""></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="main_content">
+        <div class="title_playlists">
+            <div class="title">
+                <span>Treding by Albums</span>
+
+            </div>
+            <div class="sub_menu">
+                <ul class="sub_list">
+                    <li><a class="sub_menu_item active" href="/">Home</a></li>
+                    <li><a class="sub_menu_item" href="/genres">Genres</a></li>
+                    <li><a class="sub_menu_item" href="/artist">Artists</a></li>
+                    <li><a class="sub_menu_item" href="#">Labels</a></li>
+                    <li><a class="sub_menu_item" href="/all_playlist">All Playlist</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <% if (albums && albums.length> 0) { %>
+                    <% albums.forEach(function(album) { %>
+                        <div class="swiper-slide">
+                            <div class="playlist_card">
+                                <a class="playlist_card" href="/detail-album?id=<%= album.id %>">
+                                    <img src="/uploads/albums/<%= album.img %>" alt="<%= album.title %>">
+                                    <div class="playlist_label">
+                                        <%= album.title %>
+                                    </div>
+                                    <button class="card_play_btn"><i class="fa-solid fa-play"></i></button>
+                                </a>
+                                <a href="/fav_album/<%= album.id %>">
+                                    <button class="card_like_btn"><i class="fa-solid fa-heart"></i></button>
+                                </a>
+                            </div>
+                        </div>
+                        <% }) %>
+                            <% } else { %>
+                                <div>Không có album nào.</div>
+                                <% } %>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section class="bottom_content">
+        <div class="title_bottom">
+            <span>Discover New Songs</span> 
+        </div>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <% if (songs && songs.length> 0) { %>
+                    <% songs.forEach(function(song) { %>
+                        <div class="swiper-slide">
+                            <div class="playlist_card">
+                                <a class="playlist_card" href="/detail_playlist/<%= song.id %>">
+                                    <img src="/uploads/songs/<%= song.img %>" alt="<%= song.title %>">
+                                    <div class="playlist_label">
+                                        <%= song.title %>
+                                    </div>
+                                    <button class="card_play_btn"><i class="fa-solid fa-play"></i></button>
+                                </a>
+                            </div>
+                        </div>
+                        <% }) %>
+                            <% } else { %>
+                                <div>Không có bài hát nào.</div>
+                                <% } %>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section class="search_section">
+        <div class="search_wrapper">
+            <div class="search_left">
+                <div class="search_title">Need Help to find<br>music?</div>
+                <div class="search_desc">
+                    Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
+                    ipsum
+                    suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                </div>
+            </div>
+            <div class="search_box2">
+                <form class="search_right">
+                    <input class="search_input" type="text" placeholder="Hỏi đê . . . . . ">
+                    <button class="search_btn" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer_container">
+            <div class="footer_left">
+                <div class="footer_logo">
+                    <span style="color:#fc0254;font-weight:700;">GEN</span>MUSIC
+                </div>
+                <div class="footer_copyright">
+                    COPYRIGHT ©2025 ALL RIGHTS RESERVED | THIS TEMPLATE IS MADE WITH <span style="color:#fff;">♡</span>
+                    BY
+                    <a href="#" style="color:#2196f3;text-decoration:none;">MANHCUONG</a>
+                </div>
+                <div class="footer_social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer_menus">
+                <div class="footer_menu">
+                    <div class="footer_menu_title">ABOUT US</div>
+                    <a href="#">Our Story</a>
+                    <a href="#">Sol Music Blog</a>
+                    <a href="#">History</a>
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_title">PRODUCTS</div>
+                    <a href="#">Music</a>
+                    <a href="#">Subscription</a>
+                    <a href="#">Custom Music</a>
+                    <a href="#">Footage</a>
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_title">PLAYLISTS</div>
+                    <a href="#">Newsletter</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Press</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const swiper = new Swiper('.mySwiper', {
+            autoplay: false,
+            slidesPerView: 6,
+            spaceBetween: 16,
+            loop: true,
+            centeredSlides: false,
+            grabCursor: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        window.onscroll = function () {
+            var btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        setTimeout(function () {
+            var popup = document.querySelector('.popup-alert');
+            if (popup) popup.style.display = 'none';
+        }, 2500);
+
+    </script>
+</body>
+
+</html>
