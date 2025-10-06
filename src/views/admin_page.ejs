@@ -4,27 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/admin_page.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin_page.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
     <title>Admin</title>
 </head>
 
 <body>
-    <h1>Welcome to admin page</h1>
-    <div class="nav_bar">
-        <ul class="menu_list">
-            <li class="item"><a href="/display-alluser">User</a></li>
-            <li class="item"><a href="/display-allalbum">Album</a></li>
-            <li class="item"><a href="/display-allsong">Song</a></li>
-            <li class="item"><a href="#">Artist</a></li>
-            <li class="item"><a href="#">Favourite</a></li>
-
-        </ul>
-    </div>
-    <h1><a href="/home">Return to Homepage</a></h1>
-    <table>
-
-    </table>
+    <header>
+        <div class="container">
+            <div class="nav_bar">
+                <div class="logo">
+                    <a class="logo_link" href="/admin">
+                        <span>ADMIN</span>
+                    </a>
+                </div>
+                <div class="middle_nav">
+                    <div class="main_menu">
+                        <ul class="menu_list">
+                            <li class="home_menu"><a href="/display-alluser">User</a></li>
+                            <li class="home_menu"><a href="/display-allalbum">Album</a></li>
+                            <li class="home_menu"><a href="/display-allsong">Song</a></li>
+                            <li class="home_menu"><a href="#">Artist</a></li>
+                            <li class="home_menu"><a href="#">Favourite</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right_nav">
+                    <div class="help">
+                        <a href="#">
+                            <span style="color: #9b9b9be7;">Help</span>
+                        </a>
+                    </div>
+                    <div class="divider">
+                        <a style="cursor: context-menu;" href="#">|</a>
+                    </div>
+                    <div class="sign_up">
+                        <a href="/home">
+                            <span style="color: #fc0254;">Return to Homepage</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 </body>
 
 </html>

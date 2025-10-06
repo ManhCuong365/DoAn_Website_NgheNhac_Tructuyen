@@ -6,48 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/admin_page.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="nav_bar">
-        <ul class="menu_list">
-            <li class="item"><a href="/display-alluser">User</a></li>
-            <li class="item"><a href="/display-allalbum">Album</a></li>
-            <li class="item"><a href="/display-allsong">Song</a></li>
-            <li class="item"><a href="#">Artist</a></li>
-            <li class="item"><a href="#">Favourite</a></li>
+    <header>
+        <div class="container">
+            <div class="nav_bar">
+                <div class="logo">
+                    <a class="logo_link" href="/admin">
+                        <span>ADMIN</span>
+                    </a>
+                </div>
+                <div class="middle_nav">
+                    <div class="main_menu">
+                        <ul class="menu_list">
+                            <li class="home_menu"><a href="/display-alluser">User</a></li>
+                            <li class="home_menu"><a style="color: #fc0254;" href="/display-allalbum">Album</a></li>
+                            <li class="home_menu"><a href="/display-allsong">Song</a></li>
+                            <li class="home_menu"><a href="#">Artist</a></li>
+                            <li class="home_menu"><a href="#">Favourite</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right_nav">
+                    <div class="help">
+                        <a href="#">
+                            <span style="color: #9b9b9be7;">Help</span>
+                        </a>
+                    </div>
+                    <div class="divider">
+                        <a style="cursor: context-menu;" href="#">|</a>
+                    </div>
+                    <div class="sign_up">
+                        <a href="/home">
+                            <span style="color: #fc0254;">Return to Homepage</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-        </ul>
-    </div>
-
-    <body>
-        <h1>All Albums</h1>
-        <a href="/create-page-album"> Create New Album</a>
-        <table border="1" cellspacing="0" cellpadding="10">
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Release Date</th>
-                <th>Actions</th>
-            </tr>
-            <% dataTable.forEach(album=> { %>
+    <section class="display-song-section display-album-section display-user-section">
+        <div class="container_display">
+            <h1>All Albums</h1>
+            <a class="link_create" href="/create-page-album"> Create New Album</a>
+            <table border="1" cellspacing="0" cellpadding="10">
                 <tr>
-                    <td>
-                        <%= album.id %>
-                    </td>
-                    <td>
-                        <%= album.title %>
-                    </td>
-                    <td>
-                        <%= album.release_date %>
-                    </td>
-                    <td>
-                        <a href="/edit-albums?id=<%= album.id %>"> Edit </a>
-                        <a href="/detele-albums?id=<%= album.id %>"
-                            onclick="return confirm('Are you want to detele this album?');"> Detele </a>
-                    </td>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Release Date</th>
+                    <th>Actions</th>
                 </tr>
-                <% }) %>
-    </body>
+                <% dataTable.forEach(album=> { %>
+                    <tr>
+                        <td>
+                            <%= album.id %>
+                        </td>
+                        <td>
+                            <%= album.title %>
+                        </td>
+                        <td>
+                            <%= album.release_date %>
+                        </td>
+                        <td>
+                            <a class="action_but" href="/edit-albums?id=<%= album.id %>"> Edit </a> |
+                            <a class="action_but" href="/detele-albums?id=<%= album.id %>"
+                                onclick="return confirm('Are you want to detele this album?');"> Detele </a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+        </div>
+    </section>
+</body>
 
 </html>
