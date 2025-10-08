@@ -50,8 +50,14 @@
 
     <section class="display-song-section display-album-section display-user-section">
         <div class="container_display">
-            <h1>All Albums</h1>
-            <a class="link_create" href="/create-page-album"> Create New Album</a>
+            <div class="title_content">
+                <div class="title_section">
+                    <h1>Album Management</h1>
+                </div>
+                <div class="create_new">
+                    <a class="link_create" href="/create-page-album"> Create New Album</a>
+                </div>
+            </div>
             <table border="1" cellspacing="0" cellpadding="10">
                 <tr>
                     <th>ID</th>
@@ -71,7 +77,7 @@
                             <%= album.release_date %>
                         </td>
                         <td>
-                            <a class="action_but" href="/edit-albums?id=<%= album.id %>"> Edit </a> |
+                            <a class="action_but" href="/edit-albums?id=<%= album.id %>"> Edit </a>
                             <a class="action_but" href="/detele-albums?id=<%= album.id %>"
                                 onclick="return confirm('Are you want to detele this album?');"> Detele </a>
                         </td>

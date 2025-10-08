@@ -50,8 +50,14 @@
 
     <section class="display-song-section display-album-section display-user-section">
         <div class="container_display">
-            <h1>Display Songs</h1>
-            <a class="link_create" href="/create-page-song">Create New Song</a>
+            <div class="title_content">
+                <div class="title_section">
+                    <h1>Song Management</h1>
+                </div>
+                <div class="create_new">
+                    <a class="link_create" href="/create-page-song"> Create New Song</a>
+                </div>
+            </div>
             <table border="1" cellspacing="0" cellpadding="10">
                 <tr>
                     <th>ID</th>
@@ -78,7 +84,7 @@
                             <%= song.Album ? song.Album.title : 'N/A' %>
                         </td>
                         <td>
-                            <a class="action_but" href="/edit-song?id=<%= song.id %>">Edit</a> |
+                            <a class="action_but" href="/edit-song?id=<%= song.id %>">Edit</a>
                             <a class="action_but" href="/delete-song?id=<%= song.id %>"
                                 onclick="return confirm('Are you sure you want to delete this song?');">Delete</a>
                         </td>

@@ -126,12 +126,14 @@ th,
 td {
     border: 1px solid #ddd;
     margin-top: 20px;
+    text-align: center;
 }
 
 th,
 td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
+
 }
 
 th {
@@ -270,8 +272,20 @@ th {
 }
 
 .action_but {
-    color: #fc0254;
+    color: #ffffff;
     font-weight: 600;
+    padding: 10px 15px;
+    background-color: #e52e71;
+    border-radius: 8px; 
+    margin-right: 10px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .action_but:hover {
@@ -279,6 +293,22 @@ th {
     cursor: pointer;
 }
 
+.title_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.create_new {
+    background-color: #fc0254;
+    padding: 12px;
+}
 .link_create {
-    color: black;
+    color: white;
+    font-weight: 600;
+}
+.create_new:hover {
+    transition: 0.3s;
+    background-color: #3e3e3e;
+
 }
