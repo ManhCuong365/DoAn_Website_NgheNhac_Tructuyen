@@ -44,26 +44,31 @@
                     <div class="divider">
                         <a style="cursor: context-menu;" href="#">|</a>
                     </div>
-                    <div class="login">
-                        <a href="#">
-                            <span>Login</span>
-                        </a>
-                    </div>
-                    <div class="sign_up">
-                        <a href="/get-signup">
-                            <span style="color: #fc0254;">Create an account</span>
-                        </a>
-                    </div>
-                    <!-- <div class="notification">
-                        <a href="#">
-                            <i class=""></i>
-                        </a>
-                    </div>
-                    <div class="profile">
-                        <a href="#">
-                            <i class=""></i>
-                        </a>
-                    </div> -->
+                    <% if (user) { %>
+                        <div class="login">
+                            <a href="/logout">
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                        <div class="sign_up">
+                            <a href="/profile">
+                                <span style="color: #fc0254;">
+                                    <%= user.username ? user.username : (user.email || 'Profile' ) %>
+                                </span>
+                            </a>
+                        </div>
+                        <% } else { %>
+                            <div class="login">
+                                <a href="/login">
+                                    <span>Login</span>
+                                </a>
+                            </div>
+                            <div class="sign_up">
+                                <a href="/create-account">
+                                    <span style="color: #fc0254;">Create an account</span>
+                                </a>
+                            </div>
+                            <% } %>
                 </div>
             </div>
         </div>

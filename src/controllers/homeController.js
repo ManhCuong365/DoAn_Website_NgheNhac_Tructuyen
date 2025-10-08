@@ -12,12 +12,17 @@ function shuffleArray(array) {
 }
 
 let getHomePage = async (req, res) => {
-    let songs = await SONGService.getAllSongs();
-    let albums = await ALBUMService.getAllAlbums();
-    songs = shuffleArray(songs).slice(0, 10);
-    albums = shuffleArray(albums).slice(0, 10);
-    res.render('homepage.ejs', { songs, albums });
-};
+    let songs = await db.Song.findAll({ raw: true });
+    let albums = await db.Albums.findAll({ raw: true });
+    songs = shuffleArray(songs).slice(0, 18);
+    albums = shuffleArray(albums).slice(0, 18);
+    if (req.session.user) {
+        return res.render("homepage.ejs", { user: req.session.user, songs, albums });
+    } else {
+        return res.render("homepage.ejs", { user: null, songs, albums });
+    }
+}
+
 let getProfilePage = (req, res) => {
     return res.render("profile.ejs");
 }
@@ -27,10 +32,10 @@ let getGenresPage = (req, res) => {
 let getAllPlaylistPage = async (req, res) => {
     let songs = await SONGService.getAllSongs();
     songs = shuffleArray(songs).slice(0, 18);
-    return res.render("all_playlist.ejs", { songs });
+    return res.render("all_playlist.ejs", { songs, user: req.session.user || null });
 }
 let getArtistPage = (req, res) => {
-    return res.render("artist.ejs");
+    return res.render("artist.ejs", { user: req.session.user || null });
 }
 
 let getAdminPage = (req, res) => {
@@ -48,17 +53,28 @@ let postUserSighup = async (req, res) => {
             return res.render("sighup.ejs", { message: "Email đã tồn tại!" });
         }
         let user = await db.User.create(req.body);
-
         req.session.user = {
             id: user.id,
             username: user.username,
             email: user.email,
         };
-        return res.render("homepage.ejs", { user: req.session.user });
+        let albums = await ALBUMService.getAllAlbums();
+        let songs = await SONGService.getAllSongs();
+        return res.render("homepage.ejs", { 
+            user: req.session.user,
+            albums,
+            songs,
+        });
     } catch (error) {
-        return res.render("sighup.ejs");
+        return res.render("sighup.ejs", );
     }
 }
+
+let logout = (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
+};
 
 let displayAllUsers = async (req, res) => {
     let users = await USERService.getAllUsers();
@@ -126,7 +142,11 @@ let getDetailAlbumPage = async (req, res) => {
     let id = req.query.id;
     let album = await db.Albums.findOne({ where: { id: id }, raw: true });
     let songs = await db.Song.findAll({ where: { album_id: id }, raw: true });
-    res.render('detailAlbum.ejs', { album, songs });
+    res.render('detailAlbum.ejs', {
+        album,
+        songs,
+        user: req.session.user || null
+    });
 }
 
 let getCreateAlbumPage = (req, res) => {
@@ -142,7 +162,7 @@ let editAlbum = async (req, res) => {
 }
 
 let postAlbum = async (req, res) => {
-    let imgAlbumsFile = req.file;s
+    let imgAlbumsFile = req.file;
     let { title, release_date, artist_id } = req.body;
     let img = imgAlbumsFile ? imgAlbumsFile.filename : null;
 
@@ -157,7 +177,7 @@ let postAlbum = async (req, res) => {
 
 let putAlbum = async (req, res) => {
     let imgAlbumsFile = req.file;
-    let {id, title, release_date, artist_id } = req.body;
+    let { id, title, release_date, artist_id } = req.body;
     let img = imgAlbumsFile ? imgAlbumsFile.filename : null;
 
     await ALBUMService.updateAlbumById({
@@ -250,6 +270,7 @@ export default {
 
     getLoginPage: getLoginPage,
     getSighUpPage: getSighUpPage,
+    logout: logout,
 
     displayAllUsers: displayAllUsers,
     postUserSighup: postUserSighup,

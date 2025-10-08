@@ -18,6 +18,7 @@ let initWebRoutes = (app) => {
 
     router.get('/login', homeController.getLoginPage);
     router.post('/post-loginuser', homeController.postLoginPage);
+    router.get('/logout', homeController.logout);
 
     router.get('/display-alluser', homeController.displayAllUsers);
     router.get('/edit-user', homeController.getEditUser);
