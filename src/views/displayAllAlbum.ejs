@@ -62,6 +62,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Artist</th>
                     <th>Release Date</th>
                     <th>Actions</th>
                 </tr>
@@ -72,6 +73,9 @@
                         </td>
                         <td>
                             <%= album.title %>
+                        </td>
+                        <td>
+                            <%= album.Artist ? album.Artist.name : 'N/A' %>
                         </td>
                         <td>
                             <%= album.release_date %>

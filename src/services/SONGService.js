@@ -25,6 +25,11 @@ let getAllSongs = () => {
                         model: db.Albums,
                         as: 'Album',
                         attributes: ['title']
+                    },
+                    {
+                        model: db.Artists,
+                        as: 'Artist',
+                        attributes: ['name']
                     }
                 ],
                 raw: false,

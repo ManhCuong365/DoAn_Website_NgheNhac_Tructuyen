@@ -6,6 +6,7 @@ import path from 'path';
 let router = express.Router();
 let UploadAlbums = multer({ dest: path.join(process.cwd(), 'uploads', 'albums') });
 let UploadSongs = multer({ dest: path.join(process.cwd(), 'uploads', 'songs') });
+let UploadArtists = multer({ dest: path.join(process.cwd(), 'uploads', 'artists') });
 
 let initWebRoutes = (app) => {
     router.get('/', homeController.getHomePage);
@@ -22,11 +23,18 @@ let initWebRoutes = (app) => {
 
     router.get('/display-alluser', homeController.displayAllUsers);
     router.get('/edit-user', homeController.getEditUser);
+    router.get('/create-user', homeController.getCreateUser);
+    router.post('/post-user', homeController.postUser);
     router.post('/put-user', homeController.putUser);
     router.get('/delete-user', homeController.deteleUser);
 
     router.get('/create-account', homeController.getSighUpPage);
     router.post('/post-usersighup', homeController.postUserSighup);
+
+    router.get('/display-allartist', homeController.displayAllArtist);
+    router.get('/create-page-artist', homeController.getCreateArtistPage);
+    router.post('/post-artist', UploadArtists.single('imgArtistFile'), homeController.postArtist);
+    router.post('/put-artist', UploadArtists.single('imgArtistFile'), homeController.putArtist);
 
     router.get('/display-allalbum', homeController.displayAllAlbum);
     router.get('/create-page-album', homeController.getCreateAlbumPage);

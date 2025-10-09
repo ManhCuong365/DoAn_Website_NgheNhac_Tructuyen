@@ -76,7 +76,7 @@
                             <%= song.title %>
                         </td>
                         <td>
-                            <%= song.artist_id %>
+                            <%= song.Artist ? song.Artist.name : 'N/A' %>
                         </td>
                         <td>
                             <%= song.release_date %>

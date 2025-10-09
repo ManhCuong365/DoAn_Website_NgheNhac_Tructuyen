@@ -8,7 +8,7 @@ let createNewAlbum = async (data) => {
             release_date: data.release_date,
             artist_id: data.artist_id,
         }, {
-            omitNull: true, 
+            omitNull: true,
         });
         console.log('Create album successfully');
     } catch (error) {
@@ -19,7 +19,15 @@ let createNewAlbum = async (data) => {
 let getAllAlbums = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let albums = await db.Albums.findAll({ raw: true });
+            let albums = await db.Albums.findAll({
+                include: [
+                    {
+                        model: db.Artists,
+                        as: 'Artist',
+                        attributes: ['name']
+                    }
+                ]
+            });
             resolve(albums);
         } catch (error) {
             reject(error);
@@ -98,5 +106,5 @@ export default {
     getAlbumById: getAlbumById,
     updateAlbumById: updateAlbumById,
     getSongByAlbumId: getSongByAlbumId,
-    deteleAlbum:deteleAlbum,
+    deteleAlbum: deteleAlbum,
 }

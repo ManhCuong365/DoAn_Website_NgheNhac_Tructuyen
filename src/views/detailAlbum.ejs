@@ -152,13 +152,13 @@
                                                 <%= song.title %>
                                             </div>
                                             <div class="song_artist">
-                                                <%= song.artist_id %>
+                                                <%= song.Artist ? song.Artist.name : 'N/A' %>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <%= song.artist_id %>
+                                    <%= song.Artist ? song.Artist.name : 'N/A' %>
                                 </td>
                                 <td>
                                     <%= song.release_date %>

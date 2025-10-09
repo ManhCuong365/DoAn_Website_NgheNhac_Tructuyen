@@ -26,7 +26,15 @@
         <input type="text" id="title" name="title" required>
 
         <label for="artist">Artist:</label>
-        <input type="text" id="artist_id" name="artist_id">
+        <select name="artist_id" id="artist_id">
+            <% if (typeof dataTable1 !== 'undefined' && dataTable1 && dataTable1.length) { %>
+                <% dataTable1.forEach(artist => { %>
+                    <option value="<%= artist.id %>"><%= artist.name %></option>
+                <% }) %>
+            <% } else { %>
+                <option value="">No artists available</option>
+            <% } %>
+        </select>
 
         <label for="album">Album:</label>
         <select name="album_id" id="album_id">

@@ -2,6 +2,7 @@ import db from '../models/index.js';
 import USERService from '../services/USERservice.js';
 import SONGService from '../services/SONGService.js';
 import ALBUMService from '../services/ALBUMService.js';
+import ARTISTService from '../services/ARTISTService.js';
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -34,8 +35,9 @@ let getAllPlaylistPage = async (req, res) => {
     songs = shuffleArray(songs).slice(0, 18);
     return res.render("all_playlist.ejs", { songs, user: req.session.user || null });
 }
-let getArtistPage = (req, res) => {
-    return res.render("artist.ejs", { user: req.session.user || null });
+let getArtistPage = async (req, res) => {
+    let artists = await ARTISTService.getAllArtists();
+    return res.render("artist.ejs", {artists, user: req.session.user || null });
 }
 
 let getAdminPage = (req, res) => {
@@ -60,13 +62,13 @@ let postUserSighup = async (req, res) => {
         };
         let albums = await ALBUMService.getAllAlbums();
         let songs = await SONGService.getAllSongs();
-        return res.render("homepage.ejs", { 
+        return res.render("homepage.ejs", {
             user: req.session.user,
             albums,
             songs,
         });
     } catch (error) {
-        return res.render("sighup.ejs", );
+        return res.render("sighup.ejs",);
     }
 }
 
@@ -91,7 +93,19 @@ let getEditUser = async (req, res) => {
         return res.send("User not found!");
     }
 }
+let getCreateUser = (req, res) => {
+    return res.render("createUser.ejs");
+}
+let postUser = async (req, res) => {
+    let { username, email, password } = req.body;
 
+    await USERService.createNewUser({
+        username,
+        email,
+        password,
+    })
+    return res.redirect('/display-alluser');
+}
 let putUser = async (req, res) => {
     let data = req.body;
     let allUser = await USERService.updateUserData(data);
@@ -132,6 +146,38 @@ let postLoginPage = async (req, res) => {
         return res.render("login.ejs");
     }
 };
+//Artist zone
+let displayAllArtist = async (req, res) => {
+    let artists = await ARTISTService.getAllArtists();
+    return res.render('displayAllArtist.ejs', { dataTable: artists });
+}
+
+let getCreateArtistPage = (req, res) => {
+    return res.render('createArtist.ejs');
+}
+
+let postArtist = async (req, res) => {
+    let imgArtistFile = req.file;
+    let { name } = req.body;
+    let photo_url = imgArtistFile ? imgArtistFile.filename : null;
+    await ARTISTService.createNewArtist({
+        name,
+        photo_url,
+    });
+    return res.redirect('/display-allartist');
+}
+
+let putArtist = async (req, res) => {
+    let imgArtistFile = req.file;
+    let { name } = req.body;
+    let photo_url = imgArtistFile ? imgArtistFile.filename : null;
+    await ARTISTService.upadateArtistById({
+        name,
+        photo_url,
+    });
+    return res.redirect('/display-allartist');
+}
+
 //Album zone
 let displayAllAlbum = async (req, res) => {
     let albums = await ALBUMService.getAllAlbums();
@@ -141,16 +187,26 @@ let displayAllAlbum = async (req, res) => {
 let getDetailAlbumPage = async (req, res) => {
     let id = req.query.id;
     let album = await db.Albums.findOne({ where: { id: id }, raw: true });
-    let songs = await db.Song.findAll({ where: { album_id: id }, raw: true });
+    let songs = await db.Song.findAll({
+        where: { album_id: id },
+        include: [{
+            model: db.Artists,
+            as: 'Artist',
+            attributes: ['id', 'name']
+        }]
+    });
+    let artist = album.artist_id ? await db.Artists.findOne({ where: { id: album.artist_id }, raw: true }) : null;
     res.render('detailAlbum.ejs', {
         album,
+        artist, 
         songs,
-        user: req.session.user || null
+        user: req.session.user||null
     });
 }
 
-let getCreateAlbumPage = (req, res) => {
-    return res.render('createAlbum.ejs');
+let getCreateAlbumPage = async (req, res) => {
+    let artists = await ARTISTService.getAllArtists();
+    return res.render('createAlbum.ejs', { dataTable1: artists });
 }
 
 let editAlbum = async (req, res) => {
@@ -205,7 +261,8 @@ let displayAllSong = async (req, res) => {
 
 let getCreateSongPage = async (req, res) => {
     let albums = await ALBUMService.getAllAlbums();
-    res.render('createSong.ejs', { dataTable: albums });
+    let artists = await ARTISTService.getAllArtists();
+    res.render('createSong.ejs', { dataTable: albums, dataTable1: artists });
 };
 
 let postSong = async (req, res) => {
@@ -267,7 +324,6 @@ export default {
     getAllPlaylistPage: getAllPlaylistPage,
     getArtistPage: getArtistPage,
     getAdminPage: getAdminPage,
-
     getLoginPage: getLoginPage,
     getSighUpPage: getSighUpPage,
     logout: logout,
@@ -275,9 +331,16 @@ export default {
     displayAllUsers: displayAllUsers,
     postUserSighup: postUserSighup,
     getEditUser: getEditUser,
+    getCreateUser: getCreateUser,
+    postUser: postUser,
     putUser: putUser,
     deteleUser: deteleUser,
     postLoginPage: postLoginPage,
+
+    displayAllArtist: displayAllArtist,
+    getCreateArtistPage: getCreateArtistPage,
+    postArtist: postArtist,
+    putArtist: putArtist,
 
     displayAllAlbum: displayAllAlbum,
     getCreateAlbumPage: getCreateAlbumPage,
@@ -285,7 +348,6 @@ export default {
     putAlbum: putAlbum,
     editAlbum: editAlbum,
     deteleAlbum: deteleAlbum,
-
 
     displayAllSong: displayAllSong,
     getCreateSongPage: getCreateSongPage,

@@ -20,10 +20,9 @@
         </ul>
     </div>
 
-    <body>
-        <h1 style="color: rgb(0, 0, 0);" class="create-album-title">Create New Albums</h1>
+    <h1 style="color: rgb(0, 0, 0);" class="create-album-title">Create New Albums</h1>
 
-        <div class="create-album-form">
+    <div class="create-album-form">
         <form action="/post-album" method="POST" enctype="multipart/form-data">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required>
@@ -31,12 +30,25 @@
             <label for="release_date">Release Date:</label>
             <input type="text" id="release_date" name="release_date" required>
 
+            <label for="artist_id">Artist:</label>
+            <select name="artist_id" id="artist_id">
+                <% if (typeof dataTable1 !=='undefined' && dataTable1 && dataTable1.length) { %>
+                    <% dataTable1.forEach(artist=> { %>
+                        <option value="<%= artist.id %>">
+                            <%= artist.name %>
+                        </option>
+                        <% }) %>
+                            <% } else { %>
+                                <option value="">No artists available</option>
+                                <% } %>
+            </select>
+
             <label for="img">Image:</label>
             <input type="file" id="img" name="imgAlbumsFile" accept="image/*">
 
             <button type="submit">Create Album</button>
         </form>
-        </div>
-    </body>
+    </div>
+</body>
 
 </html>

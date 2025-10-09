@@ -93,46 +93,18 @@
         </div>
 
         <div class="playlists_content artist_content">
-            <div class="artist_card playlist_card">
-                <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80"
-                    alt="Artist 1">
-                <div class="artist_label playlist_label">Artist 1</div>
-            </div>
-            <div class="artist_card playlist_card">
-                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80"
-                    alt="Artist 2">
-                <div class="artist_label playlist_label">Artist 2</div>
-            </div>
-            <div class="artist_card playlist_card">
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80"
-                    alt="Artist 3">
-                <div class="artist_label playlist_label">Artist 3</div>
-            </div>
-            <div class="artist_card playlist_card">
-                <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80"
-                    alt="Artist 4">
-                <div class="artist_label playlist_label">Artist 4</div>
-            </div>
-            <div class="artist_card playlist_card">
-                <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80"
-                    alt="Artist 1">
-                <div class="artist_label playlist_label">Artist 1</div>
-            </div>
-            <div class="artist_card playlist_card">
-                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80"
-                    alt="Artist 2">
-                <div class="artist_label playlist_label">Artist 2</div>
-            </div>
-            <div class="artist_card playlist_card">
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80"
-                    alt="Artist 3">
-                <div class="artist_label playlist_label">Artist 3</div>
-            </div>
-            <div class="artist_card playlist_card">
-                <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80"
-                    alt="Artist 4">
-                <div class="artist_label playlist_label">Artist 4</div>
-            </div>
+            <% if (artists && artists.length> 0) { %>
+                <% artists.forEach(artist=> { %>
+                    <div class="artist_card playlist_card">
+                        <img src="/uploads/artists/<%= artist.photo_url %>" alt="<%= artist.name %>">
+                        <div class="artist_label playlist_label">
+                            <%= artist.name %>
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <p>No artists found.</p>
+                            <% } %>
         </div>
     </section>
 
