@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Artist extends Model {
     static associate(models) {
       // define association here
+      Artist.hasMany(models.Albums, { foreignKey: 'artist_id' });
+      Artist.hasMany(models.Song, { foreignKey: 'artist_id' });
     }
   }
   Artist.init({

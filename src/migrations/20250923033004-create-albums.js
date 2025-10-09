@@ -19,8 +19,14 @@ module.exports = {
         defaultValue: null,
       },
       artist_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Artists',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       release_date: {
         type: Sequelize.INTEGER

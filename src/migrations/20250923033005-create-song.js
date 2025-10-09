@@ -26,6 +26,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
+      
       album_id: {
         type: Sequelize.INTEGER, 
         allowNull: true,         
@@ -37,8 +38,14 @@ module.exports = {
         onDelete: 'SET NULL',
       },
       artist_id: {
-        type: Sequelize.STRING, 
-        allowNull: false,       
+        type: Sequelize.INTEGER, 
+        allowNull: false,
+        references: {
+          model: 'Artists',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',       
       },
      
       createdAt: {

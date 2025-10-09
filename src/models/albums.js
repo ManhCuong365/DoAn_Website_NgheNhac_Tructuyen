@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'RESTRICT',
         as: 'Songs'
       });
+      Albums.belongsTo(models.Artists, {
+        foreignKey: 'artist_id',
+        onDelete: 'CASCADE',
+        as: 'Artist'
+      });
     }
   }
   Albums.init({
@@ -23,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: null,
     },
-    artist_id: DataTypes.STRING,
+    artist_id: DataTypes.INTEGER,
     release_date: DataTypes.INTEGER
   }, {
     sequelize,
