@@ -27,8 +27,9 @@ let getHomePage = async (req, res) => {
 let getProfilePage = (req, res) => {
     return res.render("profile.ejs");
 }
-let getGenresPage = (req, res) => {
-    return res.render("genres.ejs");
+let getAlbumPage = async (req, res) => {
+    let albums = await ALBUMService.getAllAlbums();
+    return res.render("album_page.ejs",{albums, user: req.session.user || null});
 }
 let getAllPlaylistPage = async (req, res) => {
     let songs = await SONGService.getAllSongs();
@@ -36,7 +37,8 @@ let getAllPlaylistPage = async (req, res) => {
     return res.render("all_playlist.ejs", { songs, user: req.session.user || null });
 }
 let getArtistPage = async (req, res) => {
-    let artists = await ARTISTService.getAllArtists();
+    let artists = await db.Artists.findAll();
+    artists = shuffleArray(artists).slice(0, 18);
     return res.render("artist.ejs", {artists, user: req.session.user || null });
 }
 
@@ -320,7 +322,7 @@ let deleteSong = async (req, res) => {
 export default {
     getHomePage: getHomePage,
     getProfilePage: getProfilePage,
-    getGenresPage: getGenresPage,
+    getAlbumPage: getAlbumPage,
     getAllPlaylistPage: getAllPlaylistPage,
     getArtistPage: getArtistPage,
     getAdminPage: getAdminPage,

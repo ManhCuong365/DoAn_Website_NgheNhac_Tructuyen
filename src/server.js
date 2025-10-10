@@ -23,6 +23,7 @@ dotenv.config();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads/albums', express.static(path.join(process.cwd(), 'uploads', 'albums')));
 app.use('/uploads/songs', express.static(path.join(process.cwd(), 'uploads', 'songs')));
+app.use('/uploads/artists', express.static(path.join(process.cwd(), 'uploads', 'artists')));
 
 
 app.use(bodyParser.json());

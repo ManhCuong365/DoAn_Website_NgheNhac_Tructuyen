@@ -12,7 +12,7 @@ let initWebRoutes = (app) => {
     router.get('/', homeController.getHomePage);
     router.get('/home', homeController.getHomePage);
     router.get('/profile', homeController.getProfilePage);
-    router.get('/genres', homeController.getGenresPage);
+    router.get('/album', homeController.getAlbumPage);
     router.get('/all_playlist', homeController.getAllPlaylistPage);
     router.get('/artist', homeController.getArtistPage);
     router.get('/admin', homeController.getAdminPage);
