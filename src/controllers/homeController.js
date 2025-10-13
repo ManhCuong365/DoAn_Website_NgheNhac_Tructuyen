@@ -3,6 +3,7 @@ import USERService from '../services/USERservice.js';
 import SONGService from '../services/SONGService.js';
 import ALBUMService from '../services/ALBUMService.js';
 import ARTISTService from '../services/ARTISTService.js';
+import FAVService from '../services/FAVService.js';
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
