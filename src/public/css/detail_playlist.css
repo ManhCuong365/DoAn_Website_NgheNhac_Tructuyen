@@ -1,4 +1,4 @@
-    .title_detail_playlists {
+.title_detail_playlists {
         padding: 20px;
         background-color: #08192d;
         color: white;
@@ -10,13 +10,15 @@
         display: flex;
         align-items: center;
     }
-
+    .detail_artist {
+        padding-top: 90px !important;
+    }
     .playlist_detail_content {
         margin-left: 20px;
         display: flex;
         flex-direction: column;
         gap: 1px;
-        padding-top: 109px;
+        padding-top: 65px;
     }
 
     .content_title img {
@@ -26,10 +28,17 @@
     }
 
     .playlist_detail_title {
-        font-size: 50px;
+        font-size: 60px;
+        margin-top: 8px;
+        margin-bottom: 8px;
         font-weight: 700;
     }
-
+    .artist_detail_title {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 700;
+    }
     .play_list_description {
         margin-top: 10px;
         color: #b3b3b3;
@@ -190,12 +199,24 @@
     .custom_audio_player {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 10px;
         background: #101c2c;
         border-radius: 16px;
-        padding: 12px 20px;
+        padding: 10px 20px 10px 10px;
         box-shadow: 0 2px 12px #0002;
-        width: 500px;
+    }
+
+    .custom_audio_player .audio_btn {
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+    }
+
+    /* make volume buttons slightly smaller */
+    .custom_audio_player #volDownBtn,
+    .custom_audio_player #volUpBtn {
+        width: 36px;
+        height: 36px;
     }
 
     .audio_btn {

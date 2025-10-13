@@ -24,7 +24,7 @@
                             <li class="home_menu"><a style="color: #fc0254;" href="/display-alluser">User</a></li>
                             <li class="home_menu"><a href="/display-allalbum">Album</a></li>
                             <li class="home_menu"><a href="/display-allsong">Song</a></li>
-                            <li class="home_menu"><a href="#">Artist</a></li>
+                            <li class="home_menu"><a href="/display-allartist">Artist</a></li>
                             <li class="home_menu"><a href="#">Favourite</a></li>
                         </ul>
                     </div>
@@ -85,7 +85,7 @@
                             <%= user.status %>
                         </td>
                         <td>
-                            <a class="action_but" href="/edit-user?id=<%= user.id %>">Edit</a> 
+                            <a class="action_but" href="/edit-user?id=<%= user.id %>">Edit</a>
                             <a class="action_but" href="/delete-user?id=<%= user.id %>"
                                 onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
                         </td>

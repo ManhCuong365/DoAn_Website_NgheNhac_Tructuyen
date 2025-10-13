@@ -79,10 +79,12 @@
             <% if (albums && albums.length> 0) { %>
                 <% albums.forEach(album=> { %>
                     <div class="album_card playlist_card">
-                        <img src="/uploads/albums/<%= album.img %>" alt="<%= album.title %>">
-                        <div class="album_label playlist_label">
-                            <%= album.title %>
-                        </div>
+                        <a href="/detail-album?id=<%= album.id %>">
+                            <img src="/uploads/albums/<%= album.img %>" alt="<%= album.title %>">
+                            <div class="album_label playlist_label">
+                                <%= album.title %>
+                            </div>
+                        </a>
                     </div>
                     <% }) %>
                         <% } else { %>

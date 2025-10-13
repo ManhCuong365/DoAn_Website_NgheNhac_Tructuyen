@@ -39,7 +39,7 @@ let getAllPlaylistPage = async (req, res) => {
 let getArtistPage = async (req, res) => {
     let artists = await db.Artists.findAll();
     artists = shuffleArray(artists).slice(0, 18);
-    return res.render("artist.ejs", {artists, user: req.session.user || null });
+    return res.render("artist_page.ejs", {artists, user: req.session.user || null });
 }
 
 let getAdminPage = (req, res) => {
@@ -156,6 +156,18 @@ let displayAllArtist = async (req, res) => {
 
 let getCreateArtistPage = (req, res) => {
     return res.render('createArtist.ejs');
+}
+let getDetailArtistPage = async (req, res) => {
+    let id = req.query.id;
+    let songs = await db.Song.findAll({ where: { artist_id: id }, raw: true });
+    let artist = await db.Artists.findOne({ where: { id: id }, raw: true });
+    let album = await ARTISTService.getAlbumByArtistId(id);
+    res.render('detailArtist.ejs', { 
+        user: req.session.user ||   null,
+        songs, 
+        artist, 
+        album
+    });
 }
 
 let postArtist = async (req, res) => {
@@ -341,6 +353,7 @@ export default {
 
     displayAllArtist: displayAllArtist,
     getCreateArtistPage: getCreateArtistPage,
+    getDetailArtistPage: getDetailArtistPage,
     postArtist: postArtist,
     putArtist: putArtist,
 
