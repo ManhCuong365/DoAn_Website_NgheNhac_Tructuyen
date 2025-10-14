@@ -5,6 +5,23 @@
     font-family: "Montserrat", sans-serif;
 }
 
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main_content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
 .container {
     display: flex;
     align-items: center;
@@ -255,6 +272,9 @@ li .home_menu {
     cursor: pointer;
 }
 
+.card_like_btn i { color: #999; transition: color .15s ease; }
+.card_like_btn.active i, .card_like_btn.toggle-active i { color: #e0245e; }
+
 .playlist_card:hover .card_play_btn,
 .playlist_card:hover .card_like_btn {
     opacity: 1;
@@ -267,7 +287,7 @@ li .home_menu {
 }
 
 .card_like_btn:hover {
-    background: #fc0254;
+    background: #dadada;
     color: #fff;
 }
 
@@ -412,7 +432,7 @@ li .home_menu {
     color: #fff;
     padding: 60px 0 40px 0;
     width: 100%;
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
 .footer_container {
