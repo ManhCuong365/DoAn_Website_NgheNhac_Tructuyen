@@ -394,7 +394,7 @@ let removeSongFromFavAll = async (req, res) => {
     }
     let user = await db.User.findOne({ where: { email: req.session.user.email }, raw: true });
     let { songId } = req.body;
-    let result = await FAVService.AddToFavorite(user.id, songId, null);
+    let result = await FAVService.RemoveFromFavorite(user.id, songId, null);
 
     let songs = await SONGService.getAllSongs();
     let favpriteSongIds = [];
@@ -416,7 +416,7 @@ let addAlbumToFavAll = async (req, res) => {
     }
     let user = await db.User.findOne({ where: { email: req.session.user.email }, raw: true });
     let { albumId } = req.body;
-    let result = await FAVService.RemoveFromFavorite(user.id, null, albumId);
+    let result = await FAVService.AddToFavorite(user.id, null, albumId);
 
     let albums = await ALBUMService.getAllAlbums();
     let favoriteAlbumIds = [];
