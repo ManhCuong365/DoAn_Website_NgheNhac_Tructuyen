@@ -13,8 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       });
       Albums.belongsTo(models.Artists, {
         foreignKey: 'artist_id',
-        onDelete: 'CASCADE',
+        onDelete: 'CASCADE',  
         as: 'Artist'
+      });
+      Albums.belongsToMany(models.User, {
+        through: models.Favorite || 'Favorites',
+        foreignKey: 'album_id',
+        otherKey: 'user_id',
+        as: 'Users'
       });
     }
   }

@@ -6,6 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
+      User.belongsToMany(models.Albums, {
+        through: 'Favorite',
+        foreignKey: 'user_id',
+        otherKey: 'album_id',
+        as: 'Albums'
+      });
     }
   }
   User.init({

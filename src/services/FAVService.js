@@ -39,8 +39,28 @@ let UserFavorites = async (user_id) => {
     return favorites;
 }
 
+let getFavoriteSongsById = async (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let favorites = await db.Favorite.findAll({
+                where: { user_id: userId },
+                include: [
+                    { model: db.Song, as: 'Song' },
+                    { model: db.Albums, as: 'Albums' }
+                ],
+                raw: false,
+            });
+            resolve(favorites);
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
+
+
 export default {
     AddToFavorite,
     RemoveFromFavorite,
-    UserFavorites
+    UserFavorites,
+    getFavoriteSongsById
 };

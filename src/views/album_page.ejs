@@ -44,16 +44,31 @@
                     <div class="divider">
                         <a style="cursor: context-menu;" href="#">|</a>
                     </div>
-                    <div class="login">
-                        <a href="#">
-                            <span>Login</span>
-                        </a>
-                    </div>
-                    <div class="sign_up">
-                        <a href="/get-signup">
-                            <span style="color: #fc0254;">Create an account</span>
-                        </a>
-                    </div>
+                    <% if (user) { %>
+                        <div class="login">
+                            <a href="/logout">
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                        <div class="sign_up">
+                            <a href="/profile">
+                                <span style="color: #fc0254;">
+                                    <%= user.username ? user.username : (user.email || 'Profile' ) %>
+                                </span>
+                            </a>
+                        </div>
+                        <% } else { %>
+                            <div class="login">
+                                <a href="/login">
+                                    <span>Login</span>
+                                </a>
+                            </div>
+                            <div class="sign_up">
+                                <a href="/create-account">
+                                    <span style="color: #fc0254;">Create an account</span>
+                                </a>
+                            </div>
+                            <% } %>
                 </div>
             </div>
         </div>
@@ -77,14 +92,26 @@
 
         <div class="playlists_content">
             <% if (albums && albums.length> 0) { %>
-                <% albums.forEach(album=> { %>
+                <% albums.forEach(function(album) { %>
                     <div class="album_card playlist_card">
-                        <a href="/detail-album?id=<%= album.id %>">
-                            <img src="/uploads/albums/<%= album.img %>" alt="<%= album.title %>">
+                        <a class="playlist_card" href="/detail-album?id=<%= album.id %>">
+                            <img src="<%= album.img && (album.img.startsWith('http') ? album.img : '/uploads/albums/' + album.img) %>"
+                                alt="<%= album.title %>">
                             <div class="album_label playlist_label">
                                 <%= album.title %>
                             </div>
+                            <button class="card_play_btn" type="button"><i class="fa-solid fa-play"></i></button>
                         </a>
+
+                        <form method="POST"
+                            action="<%= (typeof favoriteAlbumIds !== 'undefined' && favoriteAlbumIds.includes(album.id)) ? '/album/favorite/remove-all' : '/album/favorite/add-all' %>">
+                            <input type="hidden" name="albumId" value="<%= album.id %>">
+                            <button
+                                class="card_like_btn <%= (typeof favoriteAlbumIds !== 'undefined' && favoriteAlbumIds.includes(album.id)) ? 'active' : '' %>"
+                                type="submit">
+                                <i class="<%= favoriteAlbumIds ? 'fa-solid fa-heart' : 'fa-regular fa-heart' %>"></i>
+                            </button>
+                        </form>
                     </div>
                     <% }) %>
                         <% } else { %>

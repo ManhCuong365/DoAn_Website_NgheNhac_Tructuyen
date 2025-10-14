@@ -20,7 +20,7 @@ module.exports = {
       },
       song_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: null,
         references: {
           model: 'Songs',
           key: 'id'
@@ -29,7 +29,7 @@ module.exports = {
       },
       album_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: null,
         references: {
             model: 'Albums',
             key: 'id'

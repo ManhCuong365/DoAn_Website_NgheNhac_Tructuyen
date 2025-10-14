@@ -16,6 +16,7 @@ let initWebRoutes = (app) => {
     router.get('/all_playlist', homeController.getAllPlaylistPage);
     router.get('/artist', homeController.getArtistPage);
     router.get('/admin', homeController.getAdminPage);
+    router.get('/detail-album', homeController.getDetailAlbumPage);
 
     router.get('/login', homeController.getLoginPage);
     router.post('/post-loginuser', homeController.postLoginPage);
@@ -57,10 +58,14 @@ let initWebRoutes = (app) => {
         { name: 'imgFile', maxCount: 1 },
         { name: 'file_url', maxCount: 1 }
     ]), homeController.putSong);
-    
+
     router.get('/delete-song', homeController.deleteSong);
 
-    router.get('/detail-album', homeController.getDetailAlbumPage);
+    router.post('/album/favorite/add-all', homeController.addAlbumToFavAll);
+    router.post('/album/favorite/remove-all', homeController.removeAlbumFromFavAll);
+
+    router.post('/song/favorite/add-all', homeController.addSongToFavAll);
+    router.post('/song/favorite/remove-all', homeController.removeSongFromFavAll);
 
     return app.use('/', router);
 }

@@ -48,26 +48,31 @@
                     <div class="divider">
                         <a style="cursor: context-menu;" href="#">|</a>
                     </div>
-                    <div class="profile_icon">
-                        <a href="#">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                    <div class="sign_up">
-                        <a href="#">
-                            <span style="color: #fc0254">Log out</span>
-                        </a>
-                    </div>
-                    <!-- <div class="notification">
-                        <a href="#">
-                            <i class=""></i>
-                        </a>
-                    </div>
-                    <div class="profile">
-                        <a href="#">
-                            <i class=""></i>
-                        </a>
-                    </div> -->
+                    <% if (user) { %>
+                        <div class="login">
+                            <a href="/logout">
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                        <div class="sign_up">
+                            <a href="/profile">
+                                <span style="color: #fc0254;">
+                                    <%= user.username ? user.username : (user.email || 'Profile' ) %>
+                                </span>
+                            </a>
+                        </div>
+                        <% } else { %>
+                            <div class="login">
+                                <a href="/login">
+                                    <span>Login</span>
+                                </a>
+                            </div>
+                            <div class="sign_up">
+                                <a href="/create-account">
+                                    <span style="color: #fc0254;">Create an account</span>
+                                </a>
+                            </div>
+                            <% } %>
                 </div>
             </div>
         </div>
@@ -78,6 +83,33 @@
             <div class="title">
                 <span>My Playlists</span>
             </div>
+        </div>
+        <div class="playlists_content">
+            <% if (favoriteAlbums && favoriteAlbums.length> 0) { %>
+                <% favoriteAlbums.forEach(function(album) { %>
+                    <div class="playlist_card">
+                        <a href="/detail-album?id=<%= album.id %>">
+                            <img class="playlist_card" style="width:188px;height:276px"
+                                src="/uploads/albums/<%= album.img %>" alt="<%= album.title %>">
+                            <span class="card_play_btn"><i class="ti ti-player-play"></i></span>
+                        </a>
+                        <div class="playlist_label">
+                            <a style="color: black;" href="/detail-album?id=<%= album.id %>">
+                                <%= album.title %>
+                            </a>
+                        </div>
+                        <form method="POST" action="/album/favorite/remove">
+                            <input type="hidden" name="albumId" value="<%= album.id %>">
+                            <button class="card_like_btn active" type="submit">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+                        </form>
+
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <div class="no_items">You have no favorite albums yet.</div>
+                            <% } %>
         </div>
     </section>
 

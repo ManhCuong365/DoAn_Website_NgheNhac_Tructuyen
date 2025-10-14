@@ -95,6 +95,10 @@
                     </span>
                 </div>
             </div>
+            <div class="song_playing_now">
+                <div class="playing_now">
+                </div>
+            </div>
         </div>
 
         <div class="play_section">
@@ -104,11 +108,16 @@
                         <i class="fa-solid fa-play"></i>
                     </button>
                 </div>
-                <div class="like_button">
-                    <button class="like">
-                        <i class="fa-solid fa-plus"></i>
+                <div class="follow_but">
+                    <button class="follow_btn">
+                        <a href="#">Follow</a>
                     </button>
                 </div>
+                <!-- <div class="follow_but">
+                    <button class="follow_btn">
+                        <p>Unfollow</p>
+                    </button>
+                </div> -->
             </div>
 
             <div class="player_container">
@@ -238,7 +247,7 @@
                         </div>
                         <% }) %>
                             <% } else { %>
-                                <span>No albums found</span>
+                                <span>No songs found</span>
                                 <% } %>
 
             </div>
