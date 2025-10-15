@@ -132,7 +132,7 @@
                     <% songs.forEach(function(song) { %>
                         <div class="swiper-slide">
                             <div class="playlist_card">
-                                <a class="playlist_card" href="/detail_playlist/<%= song.id %>">
+                                <a class="playlist_card" href="/detail-song?id=<%= song.id %>">
                                     <img src="/uploads/songs/<%= song.img %>" alt="<%= song.title %>">
                                     <div class="playlist_label">
                                         <%= song.title %>

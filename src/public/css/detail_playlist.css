@@ -1,9 +1,12 @@
 .title_detail_playlists {
     padding: 20px;
-    background-color: #08192d;
     color: white;
     display: flex;
     align-items: center;
+    background-color: var(--background-base);
+    --color-from: var(--background-base-min-contrast);
+    --color-to: transparent;
+    background-image: linear-gradient(var(--direction-and-possibly-color-interpolation), var(--color-from), var(--color-to)), var(--dither);
 }
 
 .title_header_playlists {
@@ -199,6 +202,7 @@ tr:hover .stt .row_play_btn {
 .audio_wave {
     padding-right: 20px;
 }
+
 .player_container {
     position: fixed;
     bottom: 0;
@@ -212,9 +216,11 @@ tr:hover .stt .row_play_btn {
     align-items: center;
 
 }
+
 .songname {
     color: white;
 }
+
 .custom_audio_player {
     display: flex;
     align-items: center;
@@ -300,6 +306,7 @@ tr:hover .stt .row_play_btn {
     border-color: white;
     cursor: pointer;
 }
+
 .song_playing_now {
     position: fixed;
     top: 20%;

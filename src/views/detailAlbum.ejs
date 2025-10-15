@@ -77,7 +77,8 @@
     </header>
 
     <section class="main_content">
-        <div class="title_detail_playlists">
+        <div style="--background-base: #2E363EFF;--background-base-min-contrast: #303840FF;--direction-and-possibly-color-interpolation: in oklch to bottom;--dither: none;"
+            class="title_detail_playlists">
             <div class="title_header_playlists">
                 <div class="content_title">
                     <img src="/uploads/albums/<%= album.img %>" alt="<%= album.title %>">
@@ -111,12 +112,12 @@
         <div class="play_section">
             <div class="play_button_and_like">
                 <div class="play_button">
-                    <button class="play_now">
-                        <i class="fa-solid fa-play"></i>
+                    <button class="play_now" type="button">
+                        <i id="playNowIcon" class="fa-solid fa-play"></i>
                     </button>
                 </div>
                 <div class="like_button">
-                    <button class="like">
+                    <button class="like" type="button">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
@@ -125,9 +126,10 @@
             <div class="player_container">
                 <div class="custom_audio_player">
                     <button id="prevBtn" class="audio_btn"><i class="fa-solid fa-backward"></i></button>
-                    <button id="playPauseBtn" class="audio_btn"><i id="playPauseIcon" class="fa-solid fa-play"></i></button>
+                    <button id="playPauseBtn" class="audio_btn"><i id="playPauseIcon"
+                            class="fa-solid fa-play"></i></button>
                     <button id="nextBtn" class="audio_btn"><i class="fa-solid fa-forward"></i></button>
-        
+
                     <span id="currentTime" class="audio_time">0:00</span>
                     <input type="range" id="seekBar" value="0" min="0" max="100" step="1" class="audio_seek">
                     <span id="duration" class="audio_time">0:00</span>
@@ -155,39 +157,44 @@
                 <tbody>
                     <% if (songs && songs.length> 0) { %>
                         <% songs.forEach(function(song, index) { %>
-                            <tr class="song-row" data-src="/uploads/songs/<%= song.file_url %>" <% if (index === 0) { %> id="firstSongRow" <% } %> >
-    <td class="stt">
-        <a href="#" class="song-link" style="text-decoration:none;color:inherit;">
-            <span><%= index + 1 %></span>
-            <i class="fa-solid fa-play row_play_btn"></i>
-        </a>
-    </td>
-    <td>
-        <div class="song_info">
-            <div>
-                <div class="song_title">
-                    <%= song.title %>
-                </div>
-                <div class="song_artist">
-                    <%= song.Artist ? song.Artist.name : 'N/A' %>
-                </div>
-            </div>
-        </div>
-    </td>
-    <td>
-        <div class="artist_label">
-            <% if (artist && artist.id) { %>
-                <a href="/detail-artist?id=<%= artist.id %>"><%= artist.name %></a>
-            <% } else { %>
-                <span>Unknown artist</span>
-            <% } %>
-        </div>
-    </td>
-    <td>
-        <%= song.release_date %>
-    </td>
-    <td><!-- duration nếu có --></td>
-</tr>
+                            <tr class="song-row" data-src="/uploads/songs/<%= song.file_url %>" <% if (index===0) { %>
+                                id="firstSongRow" <% } %> >
+                                    <td class="stt">
+                                        <a href="#" class="song-link" style="text-decoration:none;color:inherit;">
+                                            <span>
+                                                <%= index + 1 %>
+                                            </span>
+                                            <i class="fa-solid fa-play row_play_btn"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="song_info">
+                                            <div>
+                                                <div class="song_title">
+                                                    <%= song.title %>
+                                                </div>
+                                                <div class="song_artist">
+                                                    <%= song.Artist ? song.Artist.name : 'N/A' %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="artist_label">
+                                            <% if (artist && artist.id) { %>
+                                                <a href="/detail-artist?id=<%= artist.id %>">
+                                                    <%= artist.name %>
+                                                </a>
+                                                <% } else { %>
+                                                    <span>Unknown artist</span>
+                                                    <% } %>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <%= song.release_date %>
+                                    </td>
+                                    <td><!-- duration nếu có --></td>
+                            </tr>
                             <% }) %>
                                 <% } else { %>
                                     <tr>
@@ -246,6 +253,70 @@
 </body>
 
 <script src="/js/audio_player.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const playBtn = document.querySelector('.play_now');
+    const playIcon = document.getElementById('playNowIcon');
+    const stopBtn = document.querySelector('.stop_now');
+    const audio = document.getElementById('audio');
+    if (!playBtn || !audio) return;
+
+    // get first song src from the table row (album play = play first track)
+    const firstRow = document.getElementById('firstSongRow');
+    const songSrc = firstRow ? firstRow.getAttribute('data-src') : '';
+
+    function toFullUrl(src) {
+        if (!src) return '';
+        return src.startsWith('http') ? src : (src.startsWith('/') ? location.origin + src : location.origin + '/' + src);
+    }
+
+    function setPlayingIcon() {
+        if (!playIcon) return;
+        playIcon.classList.remove('fa-play');
+        playIcon.classList.add('fa-pause');
+    }
+    function setPausedIcon() {
+        if (!playIcon) return;
+        playIcon.classList.remove('fa-pause');
+        playIcon.classList.add('fa-play');
+    }
+
+    playBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!songSrc) return console.warn('No song source available for album');
+        const full = toFullUrl(songSrc);
+        if (!audio.src || audio.src !== full) {
+            audio.pause();
+            audio.src = full;
+            audio.load();
+        }
+        if (audio.paused) {
+            audio.play().catch(err => {
+                console.error('Play rejected:', err);
+            });
+        } else {
+            audio.pause();
+        }
+    });
+
+    if (stopBtn) {
+        stopBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (!audio) return;
+            audio.pause();
+            audio.currentTime = 0;
+            setPausedIcon();
+        });
+    }
+
+    audio.addEventListener('play', setPlayingIcon);
+    audio.addEventListener('pause', setPausedIcon);
+    audio.addEventListener('ended', function () {
+        audio.currentTime = 0;
+        setPausedIcon();
+    });
+});
+</script>
 
 
 </html>
