@@ -20,10 +20,6 @@
     background-color: #08192d;
 }
 
-.logo {
-    width: 400px;
-}
-
 .logo_link {
     color: white;
     font-size: 28px;
@@ -37,13 +33,6 @@
 }
 
 .middle_nav {
-    position: absolute;
-    left: 30px;
-    right: 30px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex: 1;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -56,15 +45,16 @@ a {
 .menu_list {
     list-style: none;
     display: flex;
-    gap: 22px;
-    margin-right: 10px;
+    gap: 20px;
     font-size: 16px;
     font-weight: lighter;
 }
 
-li .home_menu {
+.home_menu {
+    margin-right: 25px;
+    margin-left: 25px;
     padding: 40px 11px;
-    margin-left: 50px;
+
 }
 
 .home_menu:hover {
@@ -256,16 +246,6 @@ th {
     opacity: 0.95;
 }
 
-.home_menu {
-    padding: 40px 11px;
-    margin-left: 50px;
-}
-
-.home_menu a:hover {
-    color: #fc0254;
-    transition: 0.3s;
-}
-
 .container_display {
     margin-top: 20px;
     padding: 0px 80px;
@@ -276,7 +256,7 @@ th {
     font-weight: 600;
     padding: 10px 15px;
     background-color: #e52e71;
-    border-radius: 8px; 
+    border-radius: 8px;
     margin-right: 10px;
     text-align: center;
     display: inline-block;
@@ -299,16 +279,23 @@ th {
     align-items: center;
     margin-bottom: 10px;
 }
+
 .create_new {
     background-color: #fc0254;
     padding: 12px;
 }
+
 .link_create {
     color: white;
     font-weight: 600;
 }
+
 .create_new:hover {
     transition: 0.3s;
     background-color: #3e3e3e;
 
+}
+
+::-webkit-scrollbar {
+    display: none;
 }

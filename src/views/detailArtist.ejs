@@ -146,14 +146,14 @@
                     <tr>
                         <th style="width:40px;">#</th>
                         <th>Title</th>
-                        <th>Artist</th>
+                        <th>Album</th>
                         <th>Date</th>
                         <th style="width:60px;"><i class="fa fa-clock"></i></th>
                     </tr>
                 </thead>
+
                 <tbody>
-                <tbody>
-                    <% if (songs && songs.length> 0) { %>
+                    <% if (songs.length> 0) { %>
                         <% songs.forEach(function(song, index) { %>
                             <tr class="song-row" data-src="/uploads/songs/<%= song.file_url %>">
                                 <td class="stt">
@@ -177,7 +177,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <%= song.Artist ? song.Artist.name : 'N/A' %>
+                                    <%= song.Album ? song.Album.title : 'N/A' %>
                                 </td>
                                 <td>
                                     <%= song.release_date %>
@@ -221,38 +221,6 @@
                                 <% } %>
 
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-
-        <br />
-
-        <div class="title_playlists">
-            <div class="title">
-                <span>Songs</span>
-            </div>
-        </div>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <% if (songs && songs.length> 0) { %>
-                    <% songs.forEach(songItem=> { %>
-                        <div class="swiper-slide">
-                            <div class="album_card playlist_card">
-                                <a class="playlist_card" href="/detail-album?id=<%= songItem.id %>">
-                                    <img src="/uploads/songs/<%= songItem.img %>" alt="<%= songItem.title %>">
-                                    <div class="album_label playlist_label">
-                                        <%= songItem.title %>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <% }) %>
-                            <% } else { %>
-                                <span>No songs found</span>
-                                <% } %>
-
-            </div>
-
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>

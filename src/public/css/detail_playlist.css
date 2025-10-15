@@ -44,8 +44,14 @@
     gap: 10px;
     font-size: 14px;
     font-weight: 700;
+    color: #b3b3b3;
+    margin-left: 4px;
+    align-items: center;
 }
-
+.artist_label:hover {
+    text-decoration: underline;
+    cursor: pointer;
+} 
 .play_list_description {
     margin-top: 10px;
     color: #b3b3b3;
@@ -53,7 +59,8 @@
 }
 
 .play_list_info {
-    color: #b3b3b3;
+    font-weight: 600;
+    margin-left: 4px;
 }
 
 .play_button_and_like {

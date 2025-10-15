@@ -5,9 +5,11 @@
     font-family: "Montserrat", sans-serif;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
+
 body {
     display: flex;
     flex-direction: column;
@@ -37,14 +39,10 @@ body {
     background-color: #08192d;
 }
 
-.logo {
-    width: 400px;
-}
-
 .logo_link {
     color: white;
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1px;
 }
 
@@ -54,9 +52,6 @@ body {
 }
 
 .middle_nav {
-    position: absolute;
-    left: 30px;
-    right: 30px;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -73,15 +68,15 @@ a {
 .menu_list {
     list-style: none;
     display: flex;
-    gap: 22px;
-    margin-right: 10px;
+    gap: 20px;
     font-size: 16px;
     font-weight: lighter;
 }
 
 li .home_menu {
     padding: 40px 11px;
-    margin-left: 50px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .home_menu:hover {
@@ -272,8 +267,15 @@ li .home_menu {
     cursor: pointer;
 }
 
-.card_like_btn i { color: #999; transition: color .15s ease; }
-.card_like_btn.active i, .card_like_btn.toggle-active i { color: #e0245e; }
+.card_like_btn i {
+    color: #999;
+    transition: color .15s ease;
+}
+
+.card_like_btn.active i,
+.card_like_btn.toggle-active i {
+    color: #e0245e;
+}
 
 .playlist_card:hover .card_play_btn,
 .playlist_card:hover .card_like_btn {
@@ -552,7 +554,8 @@ li .home_menu {
 }
 
 .menu_item {
-    margin-left: 50px;
+    margin-left: 25px;
+    margin-right: 25px;
     color: white;
 }
 
@@ -603,4 +606,54 @@ li .home_menu {
 
 .dropdown .link_drop:hover {
     color: #fc0254;
+}
+
+/* Responsive menu: Xếp dọc khi màn hình nhỏ hơn 992px */
+@media (max-width: 992px) {
+    .nav_bar {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .middle_nav {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .menu_list {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .menu_list li .home_menu {
+        padding: 8px 0;
+        margin-left: 0;
+    }
+
+    .right_nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav_bar a {
+        font-size: 18px;
+    }
 }

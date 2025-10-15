@@ -196,7 +196,15 @@ let getCreateArtistPage = (req, res) => {
 }
 let getDetailArtistPage = async (req, res) => {
     let id = req.query.id;
-    let songs = await db.Song.findAll({ where: { artist_id: id }, raw: true });
+    let songs = await db.Song.findAll({
+        where: { artist_id: id },
+        include: [
+            { model: db.Albums, as: 'Album', attributes: ['id', 'title'] },
+            { model: db.Artists, as: 'Artist', attributes: ['id', 'name'] }
+        ],
+        raw: true,
+        nest: true
+    });
     let artist = await db.Artists.findOne({ where: { id: id }, raw: true });
     let album = await ARTISTService.getAlbumByArtistId(id);
     res.render('detailArtist.ejs', {
@@ -265,9 +273,9 @@ let editAlbum = async (req, res) => {
     if (albumId) {
         let albumData = await ALBUMService.getAlbumById(albumId);
         let artists = await ARTISTService.getAllArtists();
-        return res.render("editAlbum.ejs", { 
-            album: albumData, 
-            dataTable: artists, 
+        return res.render("editAlbum.ejs", {
+            album: albumData,
+            dataTable: artists,
         });
     }
 }
@@ -343,10 +351,10 @@ let getEditSong = async (req, res) => {
         let songData = await SONGService.getSongById(songId);
         let albums = await ALBUMService.getAllAlbums();
         let artist = await ARTISTService.getAllArtists();
-        return res.render("editSong.ejs", { 
-            song: songData, 
+        return res.render("editSong.ejs", {
+            song: songData,
             dataTable: albums,
-            dataTable1: artist 
+            dataTable1: artist
         });
     }
     else {
@@ -457,7 +465,6 @@ let removeAlbumFromFavAll = async (req, res) => {
         let favs = await db.Favorite.findAll({ where: { user_id: user.id }, raw: true });
         favoriteAlbumIds = favs.map(f => f.album_id || f.albumId);
     }
-
     return res.render('album_page.ejs', {
         albums,
         user: req.session.user || null,
@@ -466,9 +473,9 @@ let removeAlbumFromFavAll = async (req, res) => {
         error: result && result.success ? null : (result && result.message ? result.message : 'Failed to remove favorite')
     });
 }
- let getDetailSongPage = async (req, res) => {
+let getDetailSongPage = async (req, res) => {
     let id = req.query.id;
-    let song = await db.Song.findOne({ where: {id}, raw: true });
+    let song = await db.Song.findOne({ where: { id }, raw: true });
     let artist = song.artist_id ? await db.Artists.findOne({ where: { id: song.artist_id }, raw: true }) : null;
     let album = song.album_id ? await db.Albums.findOne({ where: { id: song.album_id }, raw: true }) : null;
     res.render('detailSong.ejs', {
@@ -477,8 +484,7 @@ let removeAlbumFromFavAll = async (req, res) => {
         album,
         user: req.session.user || null
     });
- }
-
+}
 
 export default {
     getHomePage: getHomePage,
