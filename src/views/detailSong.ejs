@@ -1,0 +1,198 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/detail_playlist.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
+    <title>Detail Albums</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="nav_bar">
+                <div class="logo">
+                    <a class="logo_link" href="/home">
+                        <span>GEN</span>MUSIC
+                    </a>
+                </div>
+                <div class="middle_nav">
+                    <div class="main_menu">
+                        <ul class="menu_list">
+                            <li><a class="home_menu" href="/home">Home</a></li>
+                            <li><a class="home_menu" href="#">About</a></li>
+                            <li><a class="home_menu" href="/profile">Library</a></li>
+                            <li class="menu_item has-dropdown">Pages
+                                <ul class="dropdown">
+                                    <li class="item_drop"><a class="link_drop" href="#">Profile</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Artists</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Privacy policy</a></li>
+                                    <li class="item_drop"><a class="link_drop" href="#">Admin</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="home_menu" href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right_nav">
+                    <div class="help">
+                        <a href="#">
+                            <span style="color: #9b9b9be7;">Help</span>
+                        </a>
+                    </div>
+                    <div class="divider">
+                        <a style="cursor: context-menu;" href="#">|</a>
+                    </div>
+                    <% if (user) { %>
+                        <div class="login">
+                            <a href="/logout">
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                        <div class="sign_up">
+                            <a href="/profile">
+                                <span style="color: #fc0254;">
+                                    <%= user.username ? user.username : (user.email || 'Profile' ) %>
+                                </span>
+                            </a>
+                        </div>
+                        <% } else { %>
+                            <div class="login">
+                                <a href="/login">
+                                    <span>Login</span>
+                                </a>
+                            </div>
+                            <div class="sign_up">
+                                <a href="/create-account">
+                                    <span style="color: #fc0254;">Create an account</span>
+                                </a>
+                            </div>
+                            <% } %>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="main_content">
+        <div style="--background-base: #2E363EFF;--background-base-min-contrast: #303840FF;--direction-and-possibly-color-interpolation: in oklch to bottom;--dither: none;"
+            class="title_detail_playlists">
+            <div class="title_header_playlists">
+                <div class="content_title">
+                    <img src="/uploads/albums/<%= album.img %>" alt="<%= album.title %>">
+                </div>
+            </div>
+            <div class="playlist_detail_content">
+                <div class="play_list_info">
+                    <span><b>Song</b></span>
+                </div>
+                <div class="playlist_detail_title">
+                    <span>
+                        <%= song.title %>
+                    </span>
+                </div>
+                <div class="artist_detail_title">
+                    <div class="artist_label">
+                        <a href="/detail-artist?id=<%= artist.id %>">
+                            <%= artist.name %>
+                        </a>
+                    </div>
+                    <div class="separator">•</div>
+                    <div class="album_title">
+                        <a href="/detail-album?id=<%= album.id %>">
+                            <%= album.title %>
+                        </a>
+                    </div>
+                    <div class="separator">•</div>
+                    <div class="release_date">
+                        <span>
+                            <%= song.release_date %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="play_section">
+            <div class="play_button_and_like">
+                <div class="play_button">
+                    <button class="play_now" type="button">
+                        <i id="playNowIcon" class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+                <div class="like_button">
+                    <button class="like" type="button">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="player_container">
+                <div class="custom_audio_player">
+                    <button id="prevBtn" class="audio_btn"><i class="fa-solid fa-backward"></i></button>
+                    <button id="playPauseBtn" class="audio_btn"><i id="playPauseIcon"
+                            class="fa-solid fa-play"></i></button>
+                    <button id="nextBtn" class="audio_btn"><i class="fa-solid fa-forward"></i></button>
+
+                    <span id="currentTime" class="audio_time">0:00</span>
+                    <input type="range" id="seekBar" value="0" min="0" max="100" step="1" class="audio_seek">
+                    <span id="duration" class="audio_time">0:00</span>
+
+                    <button id="muteBtn" class="audio_btn"><i id="muteIcon" class="fa-solid fa-volume-up"></i></button>
+                    <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" class="audio_volume">
+                    <audio id="audio"></audio>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer_container">
+            <div class="footer_left">
+                <div class="footer_logo">
+                    <span style="color:#fc0254;font-weight:700;">GEN</span>MUSIC
+                </div>
+                <div class="footer_copyright">
+                    COPYRIGHT ©2025 ALL RIGHTS RESERVED | THIS TEMPLATE IS MADE WITH <span style="color:#fff;">♡</span>
+                    BY
+                    <a href="#" style="color:#2196f3;text-decoration:none;">MANHCUONG</a>
+                </div>
+                <div class="footer_social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer_menus">
+                <div class="footer_menu">
+                    <div class="footer_menu_title">ABOUT US</div>
+                    <a href="#">Our Story</a>
+                    <a href="#">Sol Music Blog</a>
+                    <a href="#">History</a>
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_title">PRODUCTS</div>
+                    <a href="#">Music</a>
+                    <a href="#">Subscription</a>
+                    <a href="#">Custom Music</a>
+                    <a href="#">Footage</a>
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_title">PLAYLISTS</div>
+                    <a href="#">Newsletter</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Press</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script src="/js/audio_player.js"></script>
+</html>
