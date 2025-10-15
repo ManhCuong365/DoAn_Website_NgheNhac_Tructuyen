@@ -15,8 +15,12 @@
         <input type="text" id="title" name="title" value="<%= album.title %>" required><br><br>
         <label for="release_date">Release Date:</label>
         <input type="text" id="release_date" name="release_date" value="<%= album.release_date %>" required><br><br>
-        <!-- <label for="artist_id">Artist ID:</label>
-        <input type="text" id="artist_id" name="artist_id" value="<%= album.artist_id %>" required><br><br> -->
+        <lable for="artist">Artist:</lable>
+        <select name="artist_id" id="artist_id" required>
+            <% dataTable.forEach(artist => { %>
+                <option value="<%= artist.id %>" <%= artist.id === album.artist_id ? 'selected' : '' %>><%= artist.name %></option>
+            <% }) %>
+        </select><br><br>
         <label for="image">Image:</label>
         <input type="file" id="imgAlbumsFile" name="imgAlbumsFile"><br><br>
         <button type="submit">Update Album</button>
