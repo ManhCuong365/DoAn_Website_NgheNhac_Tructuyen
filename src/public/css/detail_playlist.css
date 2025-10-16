@@ -48,10 +48,12 @@
     margin-left: 4px;
     align-items: center;
 }
+
 .artist_label:hover {
     text-decoration: underline;
     cursor: pointer;
-} 
+}
+
 .play_list_description {
     margin-top: 10px;
     color: #b3b3b3;
@@ -320,4 +322,42 @@ tr:hover .stt .row_play_btn {
     right: 15%;
     font-size: 20px;
     font-weight: 600;
+}
+
+.sub_artist {
+    padding: 0px 72px;
+    
+}
+
+.sub_artist_area {
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    border-bottom: 1px solid #333;
+    background-color: #08192d;
+}
+
+.title_artist_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 15px;
+    gap: 4px;
+}
+
+a.title_artist,
+a.name_artist {
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+}
+.name_artist{
+    font-weight: 700;
+}
+a.title_artist:hover{ 
+    text-decoration: underline;
+}
+.song_recom {
+    padding: 0px 72px;
 }

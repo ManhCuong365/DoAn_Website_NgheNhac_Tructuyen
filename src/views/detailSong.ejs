@@ -76,7 +76,7 @@
         </div>
     </header>
 
-    <section class="main_content">
+    <section class="main_content main_content_playlist">
         <div style="--background-base: #2E363EFF;--background-base-min-contrast: #303840FF;--direction-and-possibly-color-interpolation: in oklch to bottom;--dither: none;"
             class="title_detail_playlists">
             <div class="title_header_playlists">
@@ -151,6 +151,66 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <section class="sub_artist">
+        <div class="sub_artist_area">
+            <div class="img_sub_artist">
+                <img style="width: 80px; height: 80px; border-radius: 50%;"
+                    src="/uploads/artists/<%= artist.photo_url %>" alt="<%= artist.name %>">
+            </div>
+            <div class="title_artist_content">
+                <div class="title_artist"><a class="title_artist" href="#">Artist</a></div>
+                <div class="name_artist"><a class="name_artist" href="#">
+                        <%= artist.name %>
+                    </a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="song_recom">
+        <div class="table_rec_song playlist_table_wrap">
+            <table class="playlist_table">
+                <thead>
+                    
+                </thead>
+                <tbody>
+                    <% if (songs && songs.length> 0) { %>
+                        <% songs.forEach((s, index)=> { %>
+                            <tr>
+                                <td style="text-align: center; width: 30px;">
+                                    <%= index + 1 %>
+                                </td>
+                                <td>
+                                    <div class="song_info">
+                                        <div class="song_img">
+                                            <img style="width: 40; height: 40;" src="/uploads/songs/<%= s.img %>" alt="<%= s.title %>">
+                                        </div>
+                                        <div class="song_title">
+                                            <a href="/detail-song?id=<%= s.id %>">
+                                                <%= s.title %>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><a href="/detail-artist?id=<%= s.artist_id %>">
+                                        <%= s.artist_name %>
+                                    </a></td>
+                                <td><span>
+                                        <!-- <%= s.duration %> -->
+                                         ok
+                                    </span></td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="4" style="text-align: center;">No songs available</td>
+                                    </tr>
+                                    <% } %>
+
+                </tbody>
+            </table>
         </div>
     </section>
 

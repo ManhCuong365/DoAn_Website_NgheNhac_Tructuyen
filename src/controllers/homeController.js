@@ -476,10 +476,13 @@ let removeAlbumFromFavAll = async (req, res) => {
 let getDetailSongPage = async (req, res) => {
     let id = req.query.id;
     let song = await db.Song.findOne({ where: { id }, raw: true });
+    let songs = await db.Song.findAll({ where: {artist_id: song.artist_id}, raw: true });
+    songs = shuffleArray(songs).slice(0, 5);
     let artist = song.artist_id ? await db.Artists.findOne({ where: { id: song.artist_id }, raw: true }) : null;
     let album = song.album_id ? await db.Albums.findOne({ where: { id: song.album_id }, raw: true }) : null;
     res.render('detailSong.ejs', {
         song,
+        songs,
         artist,
         album,
         user: req.session.user || null

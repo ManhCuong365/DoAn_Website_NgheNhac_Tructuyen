@@ -3,7 +3,7 @@ import db from "../models/index.js";
 let createNewSong = async (data) => {
     try {
         await db.Song.create({
-            title: data.title,
+            title: data.title,  
             img: data.img,
             release_date: data.release_date,
             file_url: data.file_url,
