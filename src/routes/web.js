@@ -2,6 +2,7 @@ import express from 'express';
 import homeController from '../controllers/homeController.js';
 import multer from 'multer';
 import path from 'path';
+// import mp3Duration from 'mp3-duration';
 
 let router = express.Router();
 let UploadAlbums = multer({ dest: path.join(process.cwd(), 'uploads', 'albums') });
@@ -64,6 +65,9 @@ let initWebRoutes = (app) => {
 
     router.post('/album/favorite/add-all', homeController.addAlbumToFavAll);
     router.post('/album/favorite/remove-all', homeController.removeAlbumFromFavAll);
+
+    router.post('/album/favorite/add-home', homeController.addAlbumToFavHome);
+    router.post('/album/favorite/remove-home', homeController.removeAlbumFromFavHome);
 
     router.post('/song/favorite/add-all', homeController.addSongToFavAll);
     router.post('/song/favorite/remove-all', homeController.removeSongFromFavAll);

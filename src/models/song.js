@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Song extends Model {
     static associate(models) {
-      // define association here
+    
       Song.belongsTo(models.Albums, {
         foreignKey: 'album_id',
         onDelete: 'RESTRICT',
@@ -40,6 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     release_date: {
       type: DataTypes.INTEGER,
       alowNull: true,
+      validate: {
+        isNumeric: true,
+      }
     },
   }, {
     sequelize,

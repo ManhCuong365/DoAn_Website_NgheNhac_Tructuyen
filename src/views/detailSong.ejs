@@ -134,7 +134,7 @@
                 </div>
             </div>
 
-            <div class="player_container">
+            <div class="player_container_artist">
                 <div class="custom_audio_player">
                     <button id="prevBtn" class="audio_btn"><i class="fa-solid fa-backward"></i></button>
                     <button id="playPauseBtn" class="audio_btn"><i id="playPauseIcon"
@@ -169,7 +169,11 @@
         </div>
     </section>
 
-    <section class="song_recom">
+    <section class="song_recomendation song_recom">
+        <!-- <div class="title_rec">
+            <span class="content_rec">Music Recommendations</span>
+        </div> -->
+
         <div class="table_rec_song playlist_table_wrap">
             <table class="playlist_table">
                 <thead>
@@ -185,7 +189,7 @@
                                 <td>
                                     <div class="song_info">
                                         <div class="song_img">
-                                            <img style="width: 40; height: 40;" src="/uploads/songs/<%= s.img %>" alt="<%= s.title %>">
+                                            <img style="width: 40; height: 40; border-radius: 10%;" src="/uploads/songs/<%= s.img %>" alt="<%= s.title %>">
                                         </div>
                                         <div class="song_title">
                                             <a href="/detail-song?id=<%= s.id %>">

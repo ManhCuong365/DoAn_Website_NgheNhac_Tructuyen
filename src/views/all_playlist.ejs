@@ -91,10 +91,10 @@
             </div>
         </div>
 
-        <div class="playlists_content all_playlist_content">
+        <div class="playlists_content song_content">
             <% if (songs && songs.length> 0) { %>
                 <% songs.forEach(function(song) { %>
-                    <div class="playlist_card">
+                    <div class="playlist_card song_card">
                         <img src="/uploads/songs/<%= song.img %>" alt="<%= song.title %>">
                         <div class="playlist_label">
                             <%= song.title %>

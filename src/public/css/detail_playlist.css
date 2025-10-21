@@ -361,3 +361,6 @@ a.title_artist:hover{
 .song_recom {
     padding: 0px 72px;
 }
+.player_container_artist {
+   padding-right: 20px;
+}

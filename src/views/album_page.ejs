@@ -90,11 +90,11 @@
             </div>
         </div>
 
-        <div class="playlists_content">
+        <div class="playlists_content album_content">
             <% if (albums && albums.length> 0) { %>
                 <% albums.forEach(function(album) { %>
                     <div class="album_card playlist_card">
-                        <a class="playlist_card" href="/detail-album?id=<%= album.id %>">
+                        <a class="playlist_card album_card" href="/detail-album?id=<%= album.id %>">
                             <img src="<%= album.img && (album.img.startsWith('http') ? album.img : '/uploads/albums/' + album.img) %>"
                                 alt="<%= album.title %>">
                             <div class="album_label playlist_label">

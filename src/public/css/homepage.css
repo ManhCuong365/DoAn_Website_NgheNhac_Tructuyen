@@ -172,7 +172,6 @@ li .home_menu {
     display: flex;
     align-items: flex-start;
     gap: 55px;
-    margin-top: 10px;
     margin-bottom: 40px;
     flex-wrap: wrap;
 }
@@ -218,6 +217,7 @@ li .home_menu {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    justify-content: center;
 }
 
 .card_play_btn,
@@ -653,4 +653,32 @@ li .home_menu {
     .nav_bar a {
         font-size: 18px;
     }
+}
+
+.album_content {
+    gap: 30px !important;
+}
+
+.album_card img {
+    width: 270px !important;
+    height: 270px !important;
+}
+
+.artist_content {
+    gap: 30px !important;
+}
+
+.artist_card img {
+    width: 270px !important;
+    height: 270px !important;
+    border-radius: 50% !important;
+}
+
+.song_content {
+    gap: 30px !important;
+}
+
+.song_card img {
+    width: 270px !important;
+    height: 270px !important;
 }

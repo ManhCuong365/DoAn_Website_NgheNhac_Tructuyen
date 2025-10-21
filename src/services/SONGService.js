@@ -41,24 +41,6 @@ let getAllSongs = () => {
     });
 }
 
-let getSongById = (songId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let song = await db.Song.findOne({
-                where: { id: songId },
-                raw: true,
-            })
-            if (song) {
-                resolve(song);
-            } else {
-                resolve([]);
-            }
-        } catch (error) {
-            reject(error);
-        }
-    })
-}
-
 let updateSongById = async (data) => {
     await db.Song.update({
         title: data.title,
@@ -90,29 +72,10 @@ let deleteSong = async (songId) => {
     })
 }
 
-let getSongByAlbumId = (albumId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let songs = await db.Song.findAll({
-                where: { album_id: albumId },
-                raw: true,
-            })
-            if (songs) {
-                resolve(songs);
-            } else {
-                resolve([]);
-            }
-        } catch (error) {
-            reject(error);
-        }
-    });
-}
 
 export default {
     createNewSong: createNewSong,
     getAllSongs: getAllSongs,
-    getSongById: getSongById,
     updateSongById: updateSongById,
     deleteSong: deleteSong,
-    getSongByAlbumId: getSongByAlbumId,
 }

@@ -15,16 +15,30 @@ function shuffleArray(array) {
 }
 
 let getHomePage = async (req, res) => {
-    let songs = await db.Song.findAll({ raw: true });
-    let albums = await db.Albums.findAll({ raw: true });
-    songs = shuffleArray(songs).slice(0, 18);
-    albums = shuffleArray(albums).slice(0, 18);
-    if (req.session.user) {
-        return res.render("homepage.ejs", { user: req.session.user, songs, albums });
-    } else {
-        return res.render("homepage.ejs", { user: null, songs, albums });
+    try {
+        let songs = await db.Song.findAll({ raw: true });
+        let albums = await db.Albums.findAll({ raw: true });
+        songs = shuffleArray(songs).slice(0, 18);
+        albums = shuffleArray(albums).slice(0, 18);
+
+        let favoriteAlbumIds = [];
+        if (req.session && req.session.user) {
+            let user = await db.User.findOne({ where: { email: req.session.user.email }, raw: true });
+            let favs = await db.Favorite.findAll({ where: { user_id: user.id }, raw: true });
+            favoriteAlbumIds = favs.map(f => f.album_id || f.albumId);
+        }
+        return res.render("homepage.ejs", {
+            user: req.session.user || null,
+            songs,
+            albums,
+            favoriteAlbumIds
+        });
+    } catch (err) {
+        console.error('getHomePage error:', err);
+        return res.status(500).send('Server error');
     }
 }
+
 
 let getProfilePage = async (req, res) => {
     try {
@@ -68,6 +82,7 @@ let getAlbumPage = async (req, res) => {
     }
 }
 
+
 let getAllPlaylistPage = async (req, res) => {
     let songs = await SONGService.getAllSongs();
     songs = shuffleArray(songs).slice(0, 18);
@@ -94,6 +109,12 @@ let postUserSighup = async (req, res) => {
             return res.render("sighup.ejs", { message: "Email đã tồn tại!" });
         }
         let user = await db.User.create(req.body);
+        let favoriteAlbumIds = [];
+         if (req.session && req.session.user) {
+            let userFav = await db.User.findOne({ where: { email: req.session.user.email }, raw: true });
+            let favs = await db.Favorite.findAll({ where: { user_id: userFav.id }, raw: true });
+            favoriteAlbumIds = favs.map(f => f.album_id || f.albumId);
+        }
         req.session.user = {
             id: user.id,
             username: user.username,
@@ -103,6 +124,7 @@ let postUserSighup = async (req, res) => {
         let songs = await SONGService.getAllSongs();
         return res.render("homepage.ejs", {
             user: req.session.user,
+            favoriteAlbumIds,
             albums,
             songs,
         });
@@ -348,7 +370,7 @@ let postSong = async (req, res) => {
 let getEditSong = async (req, res) => {
     let songId = req.query.id;
     if (songId) {
-        let songData = await SONGService.getSongById(songId);
+        let songData = await db.Song.findOne({ where: { id: songId }, raw: true });
         let albums = await ALBUMService.getAllAlbums();
         let artist = await ARTISTService.getAllArtists();
         return res.render("editSong.ejs", {
@@ -473,10 +495,61 @@ let removeAlbumFromFavAll = async (req, res) => {
         error: result && result.success ? null : (result && result.message ? result.message : 'Failed to remove favorite')
     });
 }
+
+let addAlbumToFavHome = async (req, res) => {
+    if (!req.session || !req.session.user) {
+        return res.send('You need to sign in to perform this action!');
+    }
+    let user = await db.User.findOne({ where: { email: req.session.user.email }, raw: true });
+    let { albumId } = req.body;
+    let result = await FAVService.AddToFavorite(user.id, null, albumId);
+
+    let songs = await db.Song.findAll({ raw: true });
+    let albums = await ALBUMService.getAllAlbums();
+    let favoriteAlbumIds = [];
+    if (req.session && req.session.user) {
+        let favs = await db.Favorite.findAll({ where: { user_id: user.id }, raw: true });
+        favoriteAlbumIds = favs.map(f => f.album_id || f.albumId);
+    }
+
+    return res.render('homepage.ejs', {
+        albums,
+        songs,
+        user: req.session.user || null,
+        favoriteAlbumIds,
+        success: result && result.success ? 'Added to favorites!' : null,
+        error: result && result.success ? null : (result && result.message ? result.message : 'Failed to add favorite')
+    });
+}
+
+let removeAlbumFromFavHome = async (req, res) => {
+    if (!req.session || !req.session.user) {
+        return res.send('You need to sign in to perform this action!');
+    }
+    let user = await db.User.findOne({ where: { email: req.session.user.email }, raw: true });
+    let { albumId } = req.body;
+    let result = await FAVService.RemoveFromFavorite(user.id, null, albumId);
+
+    let songs = await db.Song.findAll({ raw: true });
+    let albums = await ALBUMService.getAllAlbums();
+    let favoriteAlbumIds = [];
+    if (req.session && req.session.user) {
+        let favs = await db.Favorite.findAll({ where: { user_id: user.id }, raw: true });
+        favoriteAlbumIds = favs.map(f => f.album_id || f.albumId);
+    }
+    return res.render('homepage.ejs', {
+        albums,
+        songs,
+        user: req.session.user || null,
+        favoriteAlbumIds,
+        success: result && result.success ? 'Removed from favorites!' : null,
+        error: result && result.success ? null : (result && result.message ? result.message : 'Failed to remove favorite')
+    });
+}
 let getDetailSongPage = async (req, res) => {
     let id = req.query.id;
     let song = await db.Song.findOne({ where: { id }, raw: true });
-    let songs = await db.Song.findAll({ where: {artist_id: song.artist_id}, raw: true });
+    let songs = await db.Song.findAll({ where: { artist_id: song.artist_id }, raw: true });
     songs = shuffleArray(songs).slice(0, 5);
     let artist = song.artist_id ? await db.Artists.findOne({ where: { id: song.artist_id }, raw: true }) : null;
     let album = song.album_id ? await db.Albums.findOne({ where: { id: song.album_id }, raw: true }) : null;
@@ -533,5 +606,7 @@ export default {
     removeAlbumFromFavAll,
     addSongToFavAll,
     removeSongFromFavAll,
+    addAlbumToFavHome,
+    removeAlbumFromFavHome,
     getDetailSongPage,
 }

@@ -81,30 +81,10 @@ let deteleAlbum = async (albumId) => {
     })
 }
 
-let getSongByAlbumId = async (albumId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let songs = await db.Song.findAll({
-                where: { album_id: albumId },
-                raw: true,
-            })
-            if (songs) {
-                resolve(songs);
-            } else {
-                resolve([]);
-            }
-        } catch (error) {
-            reject(error);
-        }
-    })
-}
-
-
 export default {
     createNewAlbum: createNewAlbum,
     getAllAlbums: getAllAlbums,
     getAlbumById: getAlbumById,
     updateAlbumById: updateAlbumById,
-    getSongByAlbumId: getSongByAlbumId,
     deteleAlbum: deteleAlbum,
 }
