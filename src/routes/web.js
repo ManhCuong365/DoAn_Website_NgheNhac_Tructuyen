@@ -8,10 +8,11 @@ let router = express.Router();
 let UploadAlbums = multer({ dest: path.join(process.cwd(), 'uploads', 'albums') });
 let UploadSongs = multer({ dest: path.join(process.cwd(), 'uploads', 'songs') });
 let UploadArtists = multer({ dest: path.join(process.cwd(), 'uploads', 'artists') });
+let UploadIcon = multer({ dest: path.join(process.cwd(), 'uploads', 'icon') });
 
 let initWebRoutes = (app) => {
     router.get('/', homeController.getHomePage);
-    router.get('/home', homeController.getHomePage);
+    router.get('/home', UploadIcon.single(), homeController.getHomePage);
     router.get('/profile', homeController.getProfilePage);
     router.get('/album', homeController.getAlbumPage);
     router.get('/all_playlist', homeController.getAllPlaylistPage);
@@ -66,8 +67,8 @@ let initWebRoutes = (app) => {
     router.post('/album/favorite/add-all', homeController.addAlbumToFavAll);
     router.post('/album/favorite/remove-all', homeController.removeAlbumFromFavAll);
 
-    router.post('/album/favorite/add-home', homeController.addAlbumToFavHome);
-    router.post('/album/favorite/remove-home', homeController.removeAlbumFromFavHome);
+    router.post('/album/favorite/add', homeController.addAlbumToFav);
+    router.post('/album/favorite/remove', homeController.removeAlbumFromFav);
 
     router.post('/song/favorite/add-all', homeController.addSongToFavAll);
     router.post('/song/favorite/remove-all', homeController.removeSongFromFavAll);

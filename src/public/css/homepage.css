@@ -682,3 +682,6 @@ li .home_menu {
     width: 270px !important;
     height: 270px !important;
 }
+.profile_name {
+    font-weight: 600;
+}

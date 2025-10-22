@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/homepage.css">
     <link rel="stylesheet" href="/css/detail_playlist.css">
+    <script src="https://kit.fontawesome.com/a4f6b459bb.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
-    <title>Detail Albums</title>
+    <title>
+        <%= album.title %> | GenMusic
+    </title>
 </head>
 
 <body>
@@ -95,7 +98,8 @@
                 </div>
                 <div class="artist_detail_title">
                     <div class="artist_img">
-                        <img style="height: 24px; width: 24px; border-radius: 50%;" src="/uploads/artists/<%= artist.photo_url %>" alt="<%= artist.name %>"> 
+                        <img style="height: 24px; width: 24px; border-radius: 50%;"
+                            src="/uploads/artists/<%= artist.photo_url %>" alt="<%= artist.name %>">
                     </div>
                     <div class="artist_label">
                         <a href="/detail-artist?id=<%= artist.id %>">
@@ -120,9 +124,13 @@
                     </button>
                 </div>
                 <div class="like_button">
-                    <button class="like" type="button">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
+                    <% const isFav=Array.isArray(favoriteAlbumIds) && favoriteAlbumIds.includes(album.id); %>
+                        <form action="<%= isFav ? '/album/favorite/remove' : '/album/favorite/add' %>" method="POST">
+                            <input type="hidden" name="albumId" value="<%= album.id %>">
+                            <button class="like <%= isFav ? 'active' : '' %>" type="submit" aria-pressed="<%= isFav %>">
+                                <i class="<%= isFav ? 'fa-solid fa-check' : 'fa-solid fa-plus' %>"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -177,36 +185,36 @@
                                                     <%= song.title %>
                                                 </div>
                                                 <div class="song_artist">
-                                                    <%= song.Artist ? song.Artist.name : 'N/A' %>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="artist_label">
-                                            <% if (artist && artist.id) { %>
-                                                <a href="/detail-artist?id=<%= artist.id %>">
-                                                    <%= artist.name %>
-                                                </a>
-                                                <% } else { %>
-                                                    <span>Unknown artist</span>
-                                                    <% } %>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <%= song.release_date %>
-                                    </td>
-                                    <td><!-- duration nếu có --></td>
-                            </tr>
-                            <% }) %>
-                                <% } else { %>
-                                    <tr>
-                                        <td colspan="5">No songs available in this album.</td>
-                                    </tr>
-                                    <% } %>
-                </tbody>
-            </table>
+                                                    <%= song.Artist ? song.Artist.name : ' N/A' %>
+                </div>
+            </div>
         </div>
+        </td>
+        <td>
+            <div class="artist_label">
+                <% if (artist && artist.id) { %>
+                    <a href="/detail-artist?id=<%= artist.id %>">
+                        <%= artist.name %>
+                    </a>
+                    <% } else { %>
+                        <span>Unknown artist</span>
+                        <% } %>
+            </div>
+        </td>
+        <td>
+            <%= song.release_date %>
+        </td>
+        <td><!-- duration nếu có --></td>
+        </tr>
+        <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="5">No songs available in this album.</td>
+                </tr>
+                <% } %>
+                    </tbody>
+                    </table>
+                    </div>
 
     </section>
 
