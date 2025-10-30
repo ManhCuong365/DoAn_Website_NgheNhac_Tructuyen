@@ -280,8 +280,14 @@ let getDetailAlbumPage = async (req, res) => {
         let artist = album.artist_id ? await db.Artists.findOne({ where: { id: album.artist_id }, raw: true }) : null;
         let favoriteAlbumIds = [];
         if (req.session && req.session.user) {
-            let user = await db.User.findOne({ where: { email: req.session.user.email }, raw: true });
-            let favs = await db.Favorite.findAll({ where: { user_id: user.id }, raw: true });
+            let user = await db.User.findOne({
+                where: { email: req.session.user.email },
+                raw: true
+            });
+            let favs = await db.Favorite.findAll({
+                where: { user_id: user.id },
+                raw: true
+            });
             favoriteAlbumIds = favs.map(f => f.album_id || f.albumId);
         }
         return res.render('detailAlbum.ejs', {

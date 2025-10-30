@@ -15,21 +15,4 @@ const swiper = new Swiper('.mySwiper', {
     },
 });
 
-window.onscroll = function () {
-    var btn = document.getElementById("backToTop");
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        btn.style.display = "block";
-    } else {
-        btn.style.display = "none";
-    }
-};
-
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-setTimeout(function () {
-    var popup = document.querySelector('.popup-alert');
-    if (popup) popup.style.display = 'none';
-}, 2500);
 

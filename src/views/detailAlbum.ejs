@@ -129,8 +129,8 @@
                             <input type="hidden" name="albumId" value="<%= album.id %>">
                             <button class="like <%= isFav ? 'active' : '' %>" type="submit" aria-pressed="<%= isFav %>">
                                 <i class="<%= isFav ? 'fa-solid fa-check' : 'fa-solid fa-plus' %>"></i>
-                        </button>
-                    </form>
+                            </button>
+                        </form>
                 </div>
             </div>
 
@@ -186,35 +186,35 @@
                                                 </div>
                                                 <div class="song_artist">
                                                     <%= song.Artist ? song.Artist.name : ' N/A' %>
-                </div>
-            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="artist_label">
+                                            <% if (artist && artist.id) { %>
+                                                <a href="/detail-artist?id=<%= artist.id %>">
+                                                    <%= artist.name %>
+                                                </a>
+                                                <% } else { %>
+                                                    <span>Unknown artist</span>
+                                                    <% } %>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <%= song.release_date %>
+                                    </td>
+                                    <td><!-- duration nếu có --></td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="5">No songs available in this album.</td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
         </div>
-        </td>
-        <td>
-            <div class="artist_label">
-                <% if (artist && artist.id) { %>
-                    <a href="/detail-artist?id=<%= artist.id %>">
-                        <%= artist.name %>
-                    </a>
-                    <% } else { %>
-                        <span>Unknown artist</span>
-                        <% } %>
-            </div>
-        </td>
-        <td>
-            <%= song.release_date %>
-        </td>
-        <td><!-- duration nếu có --></td>
-        </tr>
-        <% }) %>
-            <% } else { %>
-                <tr>
-                    <td colspan="5">No songs available in this album.</td>
-                </tr>
-                <% } %>
-                    </tbody>
-                    </table>
-                    </div>
 
     </section>
 
