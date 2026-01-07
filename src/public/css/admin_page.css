@@ -192,14 +192,17 @@ th {
 
 
 .create-song-title {
+    margin: 0 auto;
     font-size: 28px;
     font-weight: 800;
     color: #222;
-    margin: 18px 0;
-    text-align: left;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    text-align: center;
 }
 
 .create-song-form {
+    margin: 0 auto;
     max-width: 760px;
     padding: 18px;
     background: #ffffff;
@@ -218,6 +221,7 @@ th {
 
 .create-song-form input[type="text"],
 .create-song-form input[type="file"],
+.create-song-form input[type="email"],
 .create-song-form select {
     width: 100%;
     padding: 10px 12px;
