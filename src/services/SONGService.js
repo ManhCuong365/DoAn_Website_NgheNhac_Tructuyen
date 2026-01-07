@@ -3,7 +3,7 @@ import db from "../models/index.js";
 let createNewSong = async (data) => {
     try {
         await db.Song.create({
-            title: data.title,  
+            title: data.title,
             img: data.img,
             release_date: data.release_date,
             file_url: data.file_url,
@@ -16,29 +16,27 @@ let createNewSong = async (data) => {
     }
 }
 
-let getAllSongs = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let songs = await db.Song.findAll({
-                include: [
-                    {
-                        model: db.Albums,
-                        as: 'Album',
-                        attributes: ['title']
-                    },
-                    {
-                        model: db.Artists,
-                        as: 'Artist',
-                        attributes: ['name']
-                    }
-                ],
-                raw: false,
-            });
-            resolve(songs);
-        } catch (error) {
-            reject(error);
-        }
-    });
+let getAllSongs = async () => {
+    try {
+        let songs = await db.Song.findAll({
+            include: [
+                {
+                    model: db.Albums,
+                    as: 'Album',
+                    attributes: ['title']
+                },
+                {
+                    model: db.Artists,
+                    as: 'Artist',
+                    attributes: ['name']
+                }
+            ],
+            raw: false,
+        });
+        return songs;
+    } catch (error) {
+        throw error;
+    }
 }
 
 let updateSongById = async (data) => {
@@ -53,23 +51,19 @@ let updateSongById = async (data) => {
         where: { id: data.id }
     });
 }
-
 let deleteSong = async (songId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let song = await db.Song.findOne({
-                where: { id: songId }
-            })
-            if (song) {
-                await song.destroy();
-            }
-
-            resolve();
-        } catch (error) {
-            reject(error);
-            console.log('Error to delete song!', error);
+    try {
+        let song = await db.Song.findOne({
+            where: { id: songId }
+        })
+        if (song) {
+            await song.destroy();
         }
-    })
+        return;
+    } catch (error) {
+        console.log('Error to delete song!', error);
+        throw error;
+    }
 }
 
 

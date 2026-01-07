@@ -15,86 +15,94 @@ let createNewArtist = async (data) => {
 }
 
 let getAllArtists = async () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let artists = await db.Artists.findAll({
-                include: [
-                    {
-                        model: db.Albums,
-                        attributes: ['id', 'title', 'img', 'release_date'],
-                        as: 'Albums'
-                    }
-                ],
-                raw: false,
-            });
-            resolve(artists);
-        } catch (error) {
-            reject(error);
-        }
-    })
+    try {
+        let artists = await db.Artists.findAll({
+            include: [
+                {
+                    model: db.Albums,
+                    attributes: ['id', 'title', 'img', 'release_date'],
+                    as: 'Albums'
+                }
+            ],
+            raw: false,
+        });
+        return artists;
+    } catch (error) {
+        throw error;
+    }
 }
+
 let updateArtistData = async (data) => {
-    return new Promise(async (resolve, reject)=> {
-        try {
-            let artist = await db.Artists.findOne({
-                where: { id: data.id },
-                raw: false,
-            })
-            if (artist) {
-                artist.name = data.name;
-                artist.photo_url = data.photo_url;
-                await artist.save();
-                resolve();
-            } else {
-                resolve();
-            }
-        } catch (error) {
-            reject(error);
+    try {
+        let artist = await db.Artists.findOne({
+            where: { id: data.id },
+            raw: false,
+        })
+        if (artist) {
+            artist.name = data.name;
+            artist.photo_url = data.photo_url;
+            await artist.save();
+            return;
+        } else {
+            return;
         }
-    })
+    } catch (error) {
+        throw error;
+    }
 }
 
-let getAlbumByArtistId = (artistId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let albums = await db.Albums.findAll({
-                where: { artist_id: artistId },
-                raw: true,
-            })
-            if (albums) {
-                resolve(albums);
-            } else {
-                resolve([]);
-            }
-        } catch (error) {
-            reject(error);
+let getAlbumByArtistId = async (artistId) => {
+    try {
+        let albums = await db.Albums.findAll({
+            where: { id: artistId },
+            raw: true,
+        })
+        if (albums) {
+            return albums;
+        } else {
+            return [];
         }
-    })
-}
-let getSongByArtistId = (artistId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let songs = await db.Songs.findAll({
-                where: { artist_id: artistId },
-                raw: true,
-            })
-            if (songs) {
-                resolve(songs);
-            } else {
-                resolve([]);
-            }
-        } catch (error) {
-            reject(error);
-        }
-    })
+    } catch (error) {
+        throw error;
+    }
 }
 
+let getSongByArtistId = async (artistId) => {
+    try {
+        let songs = await db.Songs.findAll({
+            where: { artist_id: artistId },
+            raw: true,
+        })
+        if (songs) {
+            return songs;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+let deleteArtistById = async (artistId) => {
+    try {
+        let artist = await db.Artists.findOne({
+            where: { id: artistId }
+        })
+        if (artist) {
+            await artist.destroy();
+        }
+        return;
+    } catch (error) {
+        console.log('Error to delete artist!', error);
+        throw error;
+    }
+}
 
 export default {
     createNewArtist: createNewArtist,
     getAllArtists: getAllArtists,
     updateArtistData: updateArtistData,
-
     getAlbumByArtistId: getAlbumByArtistId,
     getSongByArtistId: getSongByArtistId,
+    deleteArtistById: deleteArtistById,
 }

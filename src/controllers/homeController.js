@@ -262,7 +262,11 @@ let putArtist = async (req, res) => {
     });
     return res.redirect('/display-allartist');
 }
-
+let deteleArtist = async (req, res) => {
+    let id = req.query.id;
+    await ARTISTService.deleteArtistById(id);
+    return res.redirect('/display-allartist');
+}
 //Album zone
 let displayAllAlbum = async (req, res) => {
     let albums = await ALBUMService.getAllAlbums();
@@ -589,6 +593,7 @@ export default {
     getDetailArtistPage: getDetailArtistPage,
     postArtist: postArtist,
     putArtist: putArtist,
+    deteleArtist: deteleArtist,
 
     displayAllAlbum: displayAllAlbum,
     getCreateAlbumPage: getCreateAlbumPage,

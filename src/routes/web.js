@@ -38,6 +38,7 @@ let initWebRoutes = (app) => {
     router.get('/display-allartist', homeController.displayAllArtist);
     router.get('/detail-artist', homeController.getDetailArtistPage);
     router.get('/create-page-artist', homeController.getCreateArtistPage);
+    router.get('/delete-artist', homeController.deteleArtist);
     router.post('/post-artist', UploadArtists.single('imgArtistFile'), homeController.postArtist);
     router.post('/put-artist', UploadArtists.single('imgArtistFile'), homeController.putArtist);
 

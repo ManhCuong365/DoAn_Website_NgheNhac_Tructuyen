@@ -40,21 +40,19 @@ let UserFavorites = async (user_id) => {
 }
 
 let getFavoriteSongsById = async (userId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let favorites = await db.Favorite.findAll({
-                where: { user_id: userId },
-                include: [
-                    { model: db.Song, as: 'Song' },
-                    { model: db.Albums, as: 'Albums' }
-                ],
-                raw: false,
-            });
-            resolve(favorites);
-        } catch (error) {
-            reject(error);
-        }
-    })
+    try {
+        let favorites = await db.Favorite.findAll({
+            where: { user_id: userId },
+            include: [
+                { model: db.Song, as: 'Song' },
+                { model: db.Albums, as: 'Albums' }
+            ],
+            raw: false,
+        });
+        return favorites;
+    } catch (error) {
+        throw error;
+    }
 }
 
 

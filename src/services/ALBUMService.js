@@ -16,43 +16,38 @@ let createNewAlbum = async (data) => {
     }
 }
 
-let getAllAlbums = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let albums = await db.Albums.findAll({
-                include: [
-                    {
-                        model: db.Artists,
-                        as: 'Artist',
-                        attributes: ['name']
-                    }
-                ]
-            });
-            resolve(albums);
-        } catch (error) {
-            reject(error);
-        }
-    })
+let getAllAlbums = async () => {
+    try {
+        let albums = await db.Albums.findAll({
+            include: [
+                {
+                    model: db.Artists,
+                    as: 'Artist',
+                    attributes: ['name']
+                }
+            ]
+        });
+        return albums;
+    } catch (error) {
+        throw error;
+    }
 }
 
-let getAlbumById = (albumId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let album = await db.Albums.findOne({
-                where: { id: albumId },
-                raw: true,
-            })
-            if (album) {
-                resolve(album);
-            } else {
-                resolve([]);
-            }
-        } catch (error) {
-            reject(error);
+let getAlbumById = async (albumId) => {
+    try {
+        let album = await db.Albums.findOne({
+            where: { id: albumId },
+            raw: true,
+        })
+        if (album) {
+            return album;
+        } else {
+            return [];
         }
-    })
+    } catch (error) {
+        throw error;
+    }
 }
-
 let updateAlbumById = async (data) => {
     await db.Albums.update({
         title: data.title,
@@ -65,22 +60,19 @@ let updateAlbumById = async (data) => {
 }
 
 let deteleAlbum = async (albumId) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let album = await db.Albums.findOne({
-                where: { id: albumId }
-            })
-            if (album) {
-                await album.destroy();
-            }
-            resolve();
-        } catch (error) {
-            reject(error);
-            console.log('Error to detele album!', error);
+    try {
+        let album = await db.Albums.findOne({
+            where: { id: albumId }
+        })
+        if (album) {
+            await album.destroy();
         }
-    })
+        return;
+    } catch (error) {
+        console.log('Error to detele album!', error);
+        throw error;
+    }
 }
-
 export default {
     createNewAlbum: createNewAlbum,
     getAllAlbums: getAllAlbums,
