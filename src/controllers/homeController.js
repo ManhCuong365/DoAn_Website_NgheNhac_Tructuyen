@@ -1,5 +1,5 @@
 import db from '../models/index.js';
-import USERService from '../services/USERservice.js';
+import USERService from '../services/USERService.js';
 import SONGService from '../services/SONGService.js';
 import ALBUMService from '../services/ALBUMService.js';
 import ARTISTService from '../services/ARTISTService.js';
@@ -9,7 +9,7 @@ const { Op, where } = require('sequelize');
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+        [array[i], array[j]] = [array[j], array[i]]
     }
     return array;
 }
@@ -88,6 +88,7 @@ let getAllPlaylistPage = async (req, res) => {
     songs = shuffleArray(songs).slice(0, 18);
     return res.render("all_playlist.ejs", { songs, user: req.session.user || null });
 }
+
 let getArtistPage = async (req, res) => {
     let artists = await db.Artists.findAll();
     artists = shuffleArray(artists).slice(0, 18);
@@ -157,6 +158,7 @@ let getEditUser = async (req, res) => {
 let getCreateUser = (req, res) => {
     return res.render("createUser.ejs");
 }
+
 let postUser = async (req, res) => {
     let { username, email, password } = req.body;
 
@@ -167,6 +169,7 @@ let postUser = async (req, res) => {
     })
     return res.redirect('/display-alluser');
 }
+
 let putUser = async (req, res) => {
     let data = req.body;
     let allUser = await USERService.updateUserData(data);
@@ -216,6 +219,7 @@ let displayAllArtist = async (req, res) => {
 let getCreateArtistPage = (req, res) => {
     return res.render('createArtist.ejs');
 }
+
 let getDetailArtistPage = async (req, res) => {
     let id = req.query.id;
     let songs = await db.Song.findAll({
@@ -444,7 +448,8 @@ let addSongToFavAll = async (req, res) => {
         success: result && result.success ? 'Added to favorites!' : null,
         error: result && result.success ? null : (result && result.message ? result.message : 'Failed to add favorite')
     });
-};
+}
+
 let removeSongFromFavAll = async (req, res) => {
     if (!req.session || !req.session.user) {
         return res.send('You need to sign in to preform this action!');
@@ -467,6 +472,7 @@ let removeSongFromFavAll = async (req, res) => {
         error: result && result.success ? null : (result && result.message ? result.message : 'Failed to add favorite')
     });
 }
+
 let addAlbumToFavAll = async (req, res) => {
     if (!req.session || !req.session.user) {
         return res.send('You need to sign in to perform this action!');
@@ -541,6 +547,7 @@ let removeAlbumFromFav = async (req, res) => {
         return res.status(500).send('Server error');
     }
 };
+
 let getDetailSongPage = async (req, res) => {
     let id = req.query.id;
     let song = await db.Song.findOne({ where: { id }, raw: true });
