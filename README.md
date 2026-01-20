@@ -25,16 +25,61 @@ npm install
 
 ### 2.Cấu hình Môi trường:
 - Tạo file .env từ .env.example.
-- Cập nhật thông tin kết nối database (MySQL) của bạn trong file .env.
+```bash
+cp .env.example .env
+```
+> Ví dụ
+```bash
+PORT=7000
+```
 
-### 3.Khởi động Server:
+### 3.Cài đặt môi trường:
+- Cài đặt **XAMPP** để sử dụng MySQL
+- Khởi động **Apache** và **MySQL** trong XAMPP Control Panel
+- Tạo database trong MySQL (ví dụ: `gen_music`)
+
+### 3. Khởi tạo cơ sở dữ liệu với Sequelize
+- Dự án sử dụng **Sequelize ORM** để quản lý và thao tác với cơ sở dữ liệu MySQL. Cấu trúc thư mục Sequelize được tùy chỉnh theo project (`src/models`, `src/migrations`, `src/config`).
+> Trong trường hợp gặp lỗi khi chạy Sequelize CLI, vui lòng tham khảo tài liệu chính thức của Sequelize để biết thêm chi tiết.
+- Chạy migrations (tạo bảng trong database)
+```bash
+npx sequelize-cli db:migrate --migrations-path ./src/migrations --config ./src/config/config.json
+```
+- Tạo Model + Migration (tạo bảng mới)
+```bash
+npx sequelize-cli model:generate \
+--name <TenModel> \
+--attributes <ten_cot:kieudulieu> \
+--models-path ./src/models \
+--migrations-path ./src/migrations
+```
+> Ví dụ
+```bash
+npx sequelize-cli model:generate \
+--name Albums \
+--attributes title:string,img:string,artist_id:integer,release_date:integer \
+--models-path ./src/models \
+--migrations-path ./src/migrations
+```
+- Xóa toàn bộ bảng (rollback tất cả migrations)
+```bash
+npx sequelize-cli db:migrate:undo:all --migrations-path ./src/migrations --config ./src/config/config.json
+```
+- Hoàn tác migration gần nhất
+```bash
+npx sequelize-cli db:migrate:undo --migrations-path ./src/migrations --config ./src/config/config.json
+```
+
+### 4.Khởi động Server:
 ```bash
 npm start
 ```
 
-### 4.Truy cập ứng dụng:
+### 5.Truy cập ứng dụng:
 - Mở trình duyệt và truy cập: http://localhost:3000/ (hoặc cổng mà bạn đã thiết lập)
 
-## Ghi Chú Phát Triển
-- Dự án đang trong quá trình phát triển và hoàn thiện.
-- Logic nghiệp vụ và tương tác database được quản lý tập trung trong các thư mục services/, controllers/, và models/.
+## Tác giả
+- Sinh viên thực hiện: Bùi Mạnh Cường
+- Lớp/MSV: DCCTCT66_07E - 2121050009
+- Giảng viên hướng dẫn: Lê Hồng Anh
+- Github: https://github.com/ManhCuong365/DoAn_Website_NgheNhac_Tructuyen.git
